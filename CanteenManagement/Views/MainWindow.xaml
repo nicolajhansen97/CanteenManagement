@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CanteenManagement"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
+        Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}"
+        WindowStyle="None"
+        WindowState="Maximized">
     <ContentControl x:Name="mainContent">
         
     </ContentControl>
