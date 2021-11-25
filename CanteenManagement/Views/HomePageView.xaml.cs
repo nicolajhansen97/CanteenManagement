@@ -12,16 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CanteenManagement.ViewModels;
 
-namespace CanteenManagement
+
+namespace CanteenManagement.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HomePageView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HomePageView : UserControl
     {
-        public MainWindow()
+        private IHomePageViewModel viewModel = null;
+        public HomePageView(IHomePageViewModel ihomePageViewModel)
         {
+            viewModel = ihomePageViewModel;
+            this.DataContext = viewModel;
             InitializeComponent();
         }
     }
