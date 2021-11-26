@@ -13,11 +13,17 @@ namespace CanteenManagement.ViewModels
     public class HomePageViewModel : IHomePageViewModel
     {
         public ICommand ChangePageCMD { get; set; }
+        public ICommand CloseProgramCMD { get; set; }
 
         public HomePageViewModel()
         {
             ChangePageCMD = new RelayCommand(() => {
                 ((App)App.Current).ChangeUserControl(App.container.Resolve<CreatePageView>());
+            });
+
+            CloseProgramCMD = new RelayCommand(() =>
+            {
+                System.Environment.Exit(1);
             });
         }
     }

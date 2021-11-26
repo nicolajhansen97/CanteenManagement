@@ -13,12 +13,18 @@ namespace CanteenManagement.ViewModels
     public class CreatePageViewModel : ICreatePageViewModel
     {
         public ICommand ChangePageCMD { get; set; }
+        public ICommand CloseProgramCMD { get; set; }
 
         public CreatePageViewModel()
         {
             ChangePageCMD = new RelayCommand(() =>
             {
                 ((App)App.Current).ChangeUserControl(App.container.Resolve<HomePageView>());
+            });
+
+            CloseProgramCMD = new RelayCommand(() =>
+            {
+                System.Environment.Exit(1);
             });
         }
     }

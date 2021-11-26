@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <None Remove="Views\Images\back.png" />
+    <None Remove="Views\Images\cancel.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Images\cancel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
