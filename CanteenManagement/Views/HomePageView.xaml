@@ -8,15 +8,61 @@
              Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
              Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
        
-    <Grid Background="Blue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width='1*'></ColumnDefinition>
-            <ColumnDefinition Width='1*'></ColumnDefinition>
-            <ColumnDefinition Width='1*'></ColumnDefinition>
-            <ColumnDefinition Width='1*'></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <Button Grid.Column="1" Content="Test" Margin="0,74,0,151"></Button>
-        <Button Grid.Column="2" Content="Test2" Margin="2,406,143,129" />
+    <Grid Background="FloralWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height='1*'></RowDefinition>
+            <RowDefinition Height='10*'></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Background="Gray"
+            Content="Canteen Manangment System"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="50">
+        </Label>
+        <Button
+           Grid.Row="1" Margin="140,144,1204,638"
+           Content="Create items"
+           HorizontalContentAlignment="Center"
+           VerticalContentAlignment="Center"
+           FontSize="50"
+           Command="{Binding ChangePageCMD}">
+        </Button>
+        <Button
+           Grid.Row="1" Margin="672,144,672,638"
+           Content="Delete items"
+           HorizontalContentAlignment="Center"
+           VerticalContentAlignment="Center"
+           FontSize="50">
+        </Button>
+        <Button
+           Grid.Row="1" Margin="1195,144,150,638"
+           Content="Edit items"
+           HorizontalContentAlignment="Center"
+           VerticalContentAlignment="Center"
+           FontSize="50">
+        </Button>
+        <Button
+           Grid.Row="1" Margin="140,551,1204,231"
+           Content="Lunch"
+           HorizontalContentAlignment="Center"
+           VerticalContentAlignment="Center"
+           FontSize="50">
+        </Button>
+        <Button
+           Grid.Row="1" Margin="672,551,672,231"
+           Content="Breakfast"
+           HorizontalContentAlignment="Center"
+           VerticalContentAlignment="Center"
+           FontSize="50">
+        </Button>
+        <Button
+           Grid.Row="1" Margin="1194,551,150,231"
+           Content="Other"
+           HorizontalContentAlignment="Center"
+           VerticalContentAlignment="Center"
+           FontSize="50">
+        </Button>
     </Grid>
 </UserControl>

@@ -10,16 +10,16 @@ using Unity;
 
 namespace CanteenManagement.ViewModels
 {
-    public class HomePageViewModel : IHomePageViewModel
+    public class CreatePageViewModel : ICreatePageViewModel
     {
         public ICommand ChangePageCMD { get; set; }
 
-        public HomePageViewModel()
+        public CreatePageViewModel()
         {
-            ChangePageCMD = new RelayCommand(() => {
-                ((App)App.Current).ChangeUserControl(App.container.Resolve<CreatePageView>());
+            ChangePageCMD = new RelayCommand(() =>
+            {
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<HomePageView>());
             });
         }
     }
-
 }

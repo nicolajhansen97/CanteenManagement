@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="CanteenManagement.Views.CreatePageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CanteenManagement.Views"
+             mc:Ignorable="d" 
+             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
+             Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
+
+    <Grid Background="FloralWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height='1*'></RowDefinition>
+            <RowDefinition Height='10*'></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Background="Gray"
+            Content="Create items"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="50">
+        </Label>
+        <Button
+            Margin="58,0,1533,970"
+            Grid.RowSpan="2"
+            Background="Gray"
+            Command="{Binding ChangePageCMD}"
+            Focusable="False">
+            <Image Source="Images/back.png" ></Image>
+        </Button>
+    </Grid>
+</UserControl>

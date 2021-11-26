@@ -14,22 +14,19 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CanteenManagement.ViewModels;
 
-
 namespace CanteenManagement.Views
 {
     /// <summary>
-    /// Interaction logic for HomePageView.xaml
+    /// Interaction logic for CreatePageView.xaml
     /// </summary>
-    public partial class HomePageView : UserControl
+    public partial class CreatePageView : UserControl
     {
-        private IHomePageViewModel viewModel = null;
-        public HomePageView(IHomePageViewModel ihomePageViewModel)
+        private ICreatePageViewModel viewModel = null;
+        public CreatePageView(ICreatePageViewModel icreatPageViewModel)
         {
-            viewModel = ihomePageViewModel;
+            viewModel = icreatPageViewModel;
             this.DataContext = viewModel;
             InitializeComponent();
         }
-
-  
     }
 }
