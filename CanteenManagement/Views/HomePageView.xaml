@@ -7,11 +7,15 @@
              mc:Ignorable="d"
              Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
              Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
-       
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="100"/>
+        </Style>
+    </UserControl.Resources>
     <Grid Background="FloralWhite">
         <Grid.RowDefinitions>
-            <RowDefinition Height='1*'></RowDefinition>
-            <RowDefinition Height='10*'></RowDefinition>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
@@ -21,48 +25,67 @@
             VerticalContentAlignment="Center"
             FontSize="50">
         </Label>
-        <Button
-           Grid.Row="1" Margin="140,144,1204,638"
-           Content="Create items"
-           HorizontalContentAlignment="Center"
-           VerticalContentAlignment="Center"
-           FontSize="50"
-           Command="{Binding ChangePageCMD}">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Button
+                Grid.Column="0"
+                Grid.Row="0"
+            Content="Create items"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="50"
+            Command="{Binding ChangePageCMD}">
         </Button>
         <Button
-           Grid.Row="1" Margin="672,144,672,638"
+            Grid.Column="1"
+                Grid.Row="0"
            Content="Delete items"
            HorizontalContentAlignment="Center"
            VerticalContentAlignment="Center"
            FontSize="50">
         </Button>
         <Button
-           Grid.Row="1" Margin="1195,144,150,638"
+            Grid.Column="2"
+                Grid.Row="0"
            Content="Edit items"
            HorizontalContentAlignment="Center"
            VerticalContentAlignment="Center"
            FontSize="50">
         </Button>
+
         <Button
-           Grid.Row="1" Margin="140,551,1204,231"
+            Grid.Column="0"
+                Grid.Row="1"
            Content="Lunch"
            HorizontalContentAlignment="Center"
            VerticalContentAlignment="Center"
            FontSize="50">
         </Button>
         <Button
-           Grid.Row="1" Margin="672,551,672,231"
+            Grid.Column="1"
+                Grid.Row="1"
            Content="Breakfast"
            HorizontalContentAlignment="Center"
            VerticalContentAlignment="Center"
            FontSize="50">
         </Button>
         <Button
-           Grid.Row="1" Margin="1194,551,150,231"
+            Grid.Column="2"
+                Grid.Row="1"
            Content="Other"
            HorizontalContentAlignment="Center"
            VerticalContentAlignment="Center"
            FontSize="50">
         </Button>
+        </Grid>
     </Grid>
 </UserControl>

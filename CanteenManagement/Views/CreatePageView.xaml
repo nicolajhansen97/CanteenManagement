@@ -13,21 +13,28 @@
             <RowDefinition Height='1*'></RowDefinition>
             <RowDefinition Height='10*'></RowDefinition>
         </Grid.RowDefinitions>
-        <Label
-            Grid.Row="0"
-            Background="Gray"
-            Content="Create items"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            FontSize="50">
-        </Label>
-        <Button
-            Margin="58,0,1533,970"
-            Grid.RowSpan="2"
+        <Grid Grid.Row="0" Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Margin="50 0 0 0"
             Background="Gray"
             Command="{Binding ChangePageCMD}"
             Focusable="False">
             <Image Source="Images/back.png" ></Image>
         </Button>
+        <Label
+            Grid.Column="1"
+            Background="Gray"
+            Content="Create items"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="50">
+            </Label>
+        </Grid>
     </Grid>
 </UserControl>
