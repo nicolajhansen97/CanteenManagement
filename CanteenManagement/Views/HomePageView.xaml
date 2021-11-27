@@ -65,14 +65,15 @@
             FontSize="50"
             Command="{Binding ChangePageCMD}">
         </Button>
-        <Button
+            <Button
             Grid.Column="1"
                 Grid.Row="0"
            Content="Delete items"
            HorizontalContentAlignment="Center"
            VerticalContentAlignment="Center"
-           FontSize="50">
-        </Button>
+           FontSize="50"
+           Command="{Binding ChangePageDeleteCMD}">
+            </Button>
         <Button
             Grid.Column="2"
                 Grid.Row="0"

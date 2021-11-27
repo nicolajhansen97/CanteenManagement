@@ -10,20 +10,16 @@ using Unity;
 
 namespace CanteenManagement.ViewModels
 {
-    public class HomePageViewModel : IHomePageViewModel
+    public class DeletePageViewModel : IDeletePageViewModel
     {
         public ICommand ChangePageCMD { get; set; }
-        public ICommand ChangePageDeleteCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
 
-        public HomePageViewModel()
+        public DeletePageViewModel()
         {
-            ChangePageCMD = new RelayCommand(() => {
-                ((App)App.Current).ChangeUserControl(App.container.Resolve<CreatePageView>());
-            });
-
-            ChangePageDeleteCMD = new RelayCommand(() => {
-                ((App)App.Current).ChangeUserControl(App.container.Resolve<DeleteItemsView>());
+            ChangePageCMD = new RelayCommand(() =>
+            {
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<HomePageView>());
             });
 
             CloseProgramCMD = new RelayCommand(() =>
@@ -32,5 +28,4 @@ namespace CanteenManagement.ViewModels
             });
         }
     }
-
 }
