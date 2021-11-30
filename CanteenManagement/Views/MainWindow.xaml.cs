@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CanteenManagement.Models;
 using CanteenManagement.Views;
 using Unity;
 
@@ -29,6 +30,8 @@ namespace CanteenManagement
 
             //((App)App.Current).ChangeUserControl(container.Resolve<BlueView>());
             ((App)App.Current).ChangeUserControl(App.container.Resolve<HomePageView>());
+
+            ApiHelper.InitializeClient();
         }
     }
 }
