@@ -10,8 +10,10 @@ namespace CanteenManagement.Models
 {
     class ApiHelper
     {
-        public static string serverUrl = "https://localhost:5001/";
-        public static string breakfastItems = "api/TblItemInfoes";
+        public static string serverUrl = "https://localhost:44355/";
+        public static string getItems = "api/TblItemInfoes";
+       // public static string createItem = "api/"
+
 
         public static HttpClient client { get; set; }
 

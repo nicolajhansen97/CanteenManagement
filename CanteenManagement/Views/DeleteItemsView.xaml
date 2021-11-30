@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CanteenManagement.Views"
+             xmlns:model="clr-namespace:CanteenManagement.Models"
              mc:Ignorable="d" 
              Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
              Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
@@ -42,5 +43,20 @@
             FontSize="50">
             </Label>
         </Grid>
+        <ListView Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" ItemsSource="{Binding ItemList}">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type model:ItemModel}">
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="50" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Description" Width="150" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Price" Width="50" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Category" Width="50" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Header="Picture" Width="50" DisplayMemberBinding="{Binding Picture}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
     </UserControl>
