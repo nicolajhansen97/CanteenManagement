@@ -7,6 +7,7 @@ using static CanteenManagement.ViewModels.DeletePageViewModel;
 
 namespace CanteenManagement.Models
 {
+    //Made by Nicolaj, Rasmus, Niels
     public class ItemModel : Models.Bindable
     {
         public Item Item { get; set; }

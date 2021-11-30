@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CanteenManagement.Models
 {
+    //Made by Nicolaj, Rasmus, Niels
     class LunchModel : Models.Bindable
     {
         private string menu;

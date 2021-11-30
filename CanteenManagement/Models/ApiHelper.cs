@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CanteenManagement.Models
 {
+    //Made by Nicolaj
     class ApiHelper
     {
         public static string serverUrl = "https://localhost:44355/";

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CanteenManagement.Models
 {
+    //Made by Rasmus
+    //What is this RASMUS!?!
     public class Test
     {
         public Employee createGuy(string name, DateTime birthday)

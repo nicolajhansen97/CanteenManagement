@@ -47,14 +47,17 @@ namespace CanteenManagement.ViewModels
 
         public class Item
         {
-            int fldItemInfoID { get; set; }
-            int fldCategoryTypeID { get; set; }
-            string fldItemName { get; set; }
-            string fldItemDescription { get; set; }
-            double fldPrice { get; set; }
+            public int fldItemInfoID { get; set; }
+            public int fldCategoryTypeID { get; set; }
+            public string fldItemName { get; set; }
+            public string fldItemDescription { get; set; }
+            public double fldPrice { get; set; }
            
-            string fldImage { get; set; }
+            public string fldImage { get; set; }
         }
+
+        //Made by Nicolaj
+        //Still need to fix ObservableCollection is empty :(
         async Task getProducts()
         {
             try
@@ -65,17 +68,15 @@ namespace CanteenManagement.ViewModels
 
                 var items = JsonConvert.DeserializeObject<List<Item>>(responseBody);
                 items.ForEach((i) => ItemList.Add(CreateItem(i)));
-
-                //MessageBox.Show(responseBody);
-
+            
             }
-            catch (HttpRequestException e)
+            catch (Exception e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
+                MessageBox.Show(e.Message);
             }
         }
 
+        //Made by Nicolaj
         private ItemModel CreateItem(Item i)
         {
             ItemModel im = new ItemModel()
@@ -83,7 +84,7 @@ namespace CanteenManagement.ViewModels
                 Item = i
             };
 
-            MessageBox.Show(im.Name);
+            
             return im;
         }
     }
