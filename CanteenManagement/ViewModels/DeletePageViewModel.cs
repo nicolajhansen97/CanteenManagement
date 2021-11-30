@@ -29,9 +29,6 @@ namespace CanteenManagement.ViewModels
         public DeletePageViewModel()
         {
 
-            
-
-
             ChangePageCMD = new RelayCommand(() =>
             {
                 ((App)App.Current).ChangeUserControl(App.container.Resolve<HomePageView>());
@@ -52,7 +49,6 @@ namespace CanteenManagement.ViewModels
             public string fldItemName { get; set; }
             public string fldItemDescription { get; set; }
             public double fldPrice { get; set; }
-           
             public string fldImage { get; set; }
         }
 
@@ -82,9 +78,15 @@ namespace CanteenManagement.ViewModels
             ItemModel im = new ItemModel()
             {
                 Item = i
+                
             };
 
-            
+            im.Category = i.fldCategoryTypeID;
+            im.Name = i.fldItemName;
+            im.Description = i.fldItemDescription;
+            im.Price = i.fldPrice;
+            im.Picture = i.fldImage;
+
             return im;
         }
     }
