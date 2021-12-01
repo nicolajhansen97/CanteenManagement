@@ -51,7 +51,7 @@
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
-            <ListView Grid.Row="0" ItemsSource="{Binding ItemList}" Margin="0,0,0,254" Grid.RowSpan="2">
+            <ListView Grid.Row="0" ItemsSource="{Binding ItemList}" SelectedItem="{Binding SelectedItem}" Margin="0,0,0,254" Grid.RowSpan="2">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type model:ItemModel}">
                     </DataTemplate>

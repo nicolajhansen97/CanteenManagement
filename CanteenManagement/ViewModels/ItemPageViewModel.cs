@@ -29,6 +29,8 @@ namespace CanteenManagement.ViewModels
         public ICommand ChangeToUpdateItemPageCMD { get; set; }
         public ICommand DeleteItemCMD { get; set; }
 
+        public ItemModel SelectedItem { get; set; }
+
         public ItemPageViewModel()
         {
 
@@ -128,10 +130,12 @@ namespace CanteenManagement.ViewModels
         The following code is using the HttpResponseMessage and connects to the HTTP client which calls DeleteAsync who takes the URI as parameter.
         This works like you make a Delete action with example Postman. The deleted product is decided from the Items ID.
         */
-        static async Task<HttpStatusCode> DeleteProductAsync(int id)
+         async Task<HttpStatusCode> DeleteProductAsync(int itemid)
         {
+           
+
             HttpResponseMessage response = await ApiHelper.client.DeleteAsync(
-                ApiHelper.serverUrl + ApiHelper.getItems+"/17");
+                ApiHelper.serverUrl + ApiHelper.getItems+ "/" + itemid);
             return response.StatusCode;
         }
 
@@ -142,15 +146,33 @@ namespace CanteenManagement.ViewModels
         */
         async Task DeleteItem()
         {
+            int itemID = 0;
+
             try
             {
-                var statusCode = await DeleteProductAsync(18);
-                MessageBox.Show($"Deleted (HTTP Status = {(int)statusCode})");
-                getProducts();
+                itemID = SelectedItem.ItemID;
             }
-            catch (Exception e)
+                catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+            }
+
+            if (itemID != 0)
+            {
+                try
+                {
+                    var statusCode = await DeleteProductAsync(itemID);
+                    MessageBox.Show($"Deleted (HTTP Status = {(int)statusCode})");
+                    getProducts();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please choose an item, before trying deleting it!");
             }
         }
     }
