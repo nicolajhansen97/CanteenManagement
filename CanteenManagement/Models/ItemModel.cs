@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static CanteenManagement.ViewModels.DeletePageViewModel;
+using static CanteenManagement.ViewModels.ItemPageViewModel;
 
 namespace CanteenManagement.Models
 {
@@ -11,6 +11,14 @@ namespace CanteenManagement.Models
     public class ItemModel : Models.Bindable
     {
         public Item Item { get; set; }
+
+        private int itemID;
+
+        public int ItemID
+        {
+            get { return itemID; }
+            set { itemID = value; propertyIsChanged(); }
+        }
 
         private string name;
 

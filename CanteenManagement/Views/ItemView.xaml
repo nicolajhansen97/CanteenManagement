@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="CanteenManagement.Views.ItemView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CanteenManagement.Views"
+             xmlns:model="clr-namespace:CanteenManagement.Models"
+             mc:Ignorable="d" 
+             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
+             Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
+
+    <Grid Background="FloralWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height='1*'></RowDefinition>
+            <RowDefinition Height='10*'></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Margin="50 0 0 0"
+            Background="Gray"
+            Command="{Binding ChangePageCMD}">
+                <Image Source="Images/back.png" ></Image>
+            </Button>
+            <Button
+                Grid.Column="2"
+                Margin="0 0 50 0"
+            Background="Gray"
+            Command="{Binding CloseProgramCMD}">
+                <Image Source="Images/cancel.png"></Image>
+            </Button>
+            <Label
+            Grid.Column="1"
+            Background="Gray"
+            Content="Item management"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="50">
+            </Label>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0 25 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListView Grid.Row="0" Grid.Column="0" ItemsSource="{Binding ItemList}" Margin="0,0,0,254" Grid.RowSpan="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type model:ItemModel}">
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="45" DisplayMemberBinding="{Binding ItemID}"/>
+                        <GridViewColumn Header="Name" Width="300" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Description" Width="800" DisplayMemberBinding="{Binding Description}"/>
+                        <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding Price}"/>
+                        <GridViewColumn Header="Category" Width="150" DisplayMemberBinding="{Binding Category}"/>
+                        <GridViewColumn Header="Picture" Width="250" DisplayMemberBinding="{Binding Picture}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Content="Create new item"
+                FontSize="25"
+                Command="{Binding ChangeToCreatePageCMD}"
+                Margin="262,758,1244,50">
+            </Button>
+            <Button
+                Grid.Row="1"
+                Grid.Column="0" 
+                Content="Edit item"
+                FontSize="25"
+                Command="{Binding ChangeToUpdateItemPageCMD}"
+                Margin="756,758,756,50">
+            </Button>
+            <Button
+                Grid.Row="1" 
+                Grid.Column="0" 
+                Content="Delete item"
+                Command="{Binding DeleteItemCMD}"
+                FontSize="25"
+                Margin="1222,758,259,56">
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

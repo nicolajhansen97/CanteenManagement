@@ -19,12 +19,12 @@ namespace CanteenManagement.Views
     /// <summary>
     /// Interaction logic for DeleteItems.xaml
     /// </summary>
-    public partial class DeleteItemsView : UserControl
+    public partial class ItemView : UserControl
     {
-        private IDeletePageViewModel viewModel = null;
-        public DeleteItemsView(IDeletePageViewModel iDeletePageViewModel)
+        private IItemPageViewModel viewModel = null;
+        public ItemView(IItemPageViewModel iItemPageViewModel)
         {
-            viewModel = iDeletePageViewModel;
+            viewModel = iItemPageViewModel;
             this.DataContext = viewModel;
             InitializeComponent();
         }

@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="CanteenManagement.Views.CreatePageView"
+﻿<UserControl x:Class="CanteenManagement.Views.UpdateItemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CanteenManagement.Views"
-             xmlns:model="clr-namespace:CanteenManagement.Models"
              mc:Ignorable="d" 
-             Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
+       Height="{Binding Source={x:Static SystemParameters.PrimaryScreenHeight}}"
              Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
 
     <Grid Background="FloralWhite">
@@ -37,7 +36,7 @@
             <Label
             Grid.Column="1"
             Background="Gray"
-            Content="Create items"
+            Content="Update item"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"
             FontSize="50">
@@ -65,7 +64,7 @@
             </Label>
             <TextBox
                    Grid.Column="1"
-                   Text="{Binding ItemName}"
+                   Text=""
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
             <Label Grid.Row ="1"
@@ -79,10 +78,10 @@
                 
                    Grid.Row="1"
                    Grid.Column="1"
-                   Text="{Binding ItemDescription}"
+                   Text=""
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="162"/>
-            
+
             <Label Grid.Row ="2"
                    Grid.Column="0"
                    Content="Price:"
@@ -94,10 +93,10 @@
                 
                    Grid.Row="2"
                    Grid.Column="1"
-                   Text="{Binding Price}"
+                   Text=""
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
-            
+
             <Label Grid.Row ="3"
                    Grid.Column="0"
                    Content="Category:"
@@ -109,7 +108,7 @@
                 
                    Grid.Row="3"
                    Grid.Column="1"
-                   Text="{Binding CategoryID}"
+                   Text=""
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
 
@@ -124,18 +123,18 @@
                 
                    Grid.Row="4"
                    Grid.Column="1"
-                   Text="{Binding Image}"
+                   Text=""
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
 
             <Button
                 Grid.Row="5"
                 Grid.ColumnSpan="2"
-                Content="Create product"
+                Content="Update product"
                 FontSize="50"
-                Command="{Binding CreateProductCMD}">
+                Command="{Binding UpdateItemCMD}">
 
-                </Button>
+            </Button>
 
         </Grid>
     </Grid>

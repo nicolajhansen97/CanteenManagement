@@ -28,7 +28,7 @@ namespace CanteenManagement.ViewModels
     public class CreatePageViewModel : Bindable, ICreatePageViewModel
     {
 
-        public ICommand ChangePageCMD { get; set; }
+        public ICommand ChangeToItemPageCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
         public ICommand CreateProductCMD { get; set; }
 
@@ -42,9 +42,9 @@ namespace CanteenManagement.ViewModels
         public CreatePageViewModel()
         {
 
-            ChangePageCMD = new RelayCommand(() =>
+            ChangeToItemPageCMD = new RelayCommand(() =>
             {
-                ((App)App.Current).ChangeUserControl(App.container.Resolve<HomePageView>());
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<ItemView>());
             });
 
             CloseProgramCMD = new RelayCommand(() =>
@@ -79,6 +79,8 @@ namespace CanteenManagement.ViewModels
 
                 var url = await CreateProductAsync(item);
                 MessageBox.Show($"Created at {url}");
+
+                
             }
 
             catch (Exception e)
@@ -94,6 +96,7 @@ namespace CanteenManagement.ViewModels
                 ApiHelper.serverUrl + ApiHelper.getItems, item);
                 response.EnsureSuccessStatusCode();
 
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<ItemView>());
                 // return URI of the created resource.
                 return response.Headers.Location;
 

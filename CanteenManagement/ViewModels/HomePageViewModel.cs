@@ -13,17 +13,13 @@ namespace CanteenManagement.ViewModels
     public class HomePageViewModel : IHomePageViewModel
     {
         public ICommand ChangePageCMD { get; set; }
-        public ICommand ChangePageDeleteCMD { get; set; }
+        public ICommand ChangePageItemCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
 
         public HomePageViewModel()
         {
-            ChangePageCMD = new RelayCommand(() => {
-                ((App)App.Current).ChangeUserControl(App.container.Resolve<CreatePageView>());
-            });
-
-            ChangePageDeleteCMD = new RelayCommand(() => {
-                ((App)App.Current).ChangeUserControl(App.container.Resolve<DeleteItemsView>());
+            ChangePageItemCMD = new RelayCommand(() => {
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<ItemView>());
             });
 
             CloseProgramCMD = new RelayCommand(() =>

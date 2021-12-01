@@ -31,7 +31,8 @@ namespace CanteenManagement
         {
             container.RegisterSingleton<IHomePageViewModel, HomePageViewModel>();
             container.RegisterSingleton<ICreatePageViewModel, CreatePageViewModel>();
-            container.RegisterSingleton<IDeletePageViewModel, DeletePageViewModel>();
+            container.RegisterSingleton<IItemPageViewModel, ItemPageViewModel>();
+            container.RegisterSingleton<IUpdateItemPageViewModel, UpdateItemPageViewModel>();
         }
 
         /// <summary>

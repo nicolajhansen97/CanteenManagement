@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using Unity;
 
 namespace CanteenManagement.ViewModels
 {
-    public class DeletePageViewModel : Bindable, IDeletePageViewModel
+    public class ItemPageViewModel : Bindable, IItemPageViewModel
     {
         private ObservableCollection<ItemModel> itemList = new ObservableCollection<ItemModel>();
         public ObservableCollection<ItemModel> ItemList
@@ -24,9 +25,11 @@ namespace CanteenManagement.ViewModels
         }
         public ICommand ChangePageCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
+        public ICommand ChangeToCreatePageCMD { get; set; }
+        public ICommand ChangeToUpdateItemPageCMD { get; set; }
+        public ICommand DeleteItemCMD { get; set; }
 
-
-        public DeletePageViewModel()
+        public ItemPageViewModel()
         {
 
             ChangePageCMD = new RelayCommand(() =>
@@ -38,6 +41,21 @@ namespace CanteenManagement.ViewModels
             {
                 System.Environment.Exit(1);
             });
+
+            ChangeToCreatePageCMD = new RelayCommand(() => {
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<CreatePageView>());
+            });
+
+
+            ChangeToUpdateItemPageCMD = new RelayCommand(() => {
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<UpdateItemView>());
+            });
+
+            DeleteItemCMD = new RelayCommand(() => {
+                DeleteItem();
+            });
+
+
 
             getProducts();
         }
@@ -53,11 +71,12 @@ namespace CanteenManagement.ViewModels
         }
 
         //Made by Nicolaj
-        //Still need to fix ObservableCollection is empty :(
         async Task getProducts()
         {
             try
             {
+                ItemList.Clear();
+
                 HttpResponseMessage response = await ApiHelper.client.GetAsync(ApiHelper.serverUrl + ApiHelper.getItems);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -86,8 +105,34 @@ namespace CanteenManagement.ViewModels
             im.Description = i.fldItemDescription;
             im.Price = i.fldPrice;
             im.Picture = i.fldImage;
+            im.ItemID = i.fldItemInfoID;
 
             return im;
+        }
+
+
+
+        //Made by Nicolaj
+        static async Task<HttpStatusCode> DeleteProductAsync(int id)
+        {
+            HttpResponseMessage response = await ApiHelper.client.DeleteAsync(
+                ApiHelper.serverUrl + ApiHelper.getItems+"/17");
+            return response.StatusCode;
+        }
+
+        //Made by Nicolaj
+        async Task DeleteItem()
+        {
+            try
+            {
+                var statusCode = await DeleteProductAsync(18);
+                MessageBox.Show($"Deleted (HTTP Status = {(int)statusCode})");
+                getProducts();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

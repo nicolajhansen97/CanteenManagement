@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CanteenManagement.ViewModels
 {
-    public interface IDeletePageViewModel
+    public interface IItemPageViewModel
     {
     }
 }
