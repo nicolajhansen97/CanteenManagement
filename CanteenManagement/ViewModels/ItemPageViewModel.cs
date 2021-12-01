@@ -56,7 +56,7 @@ namespace CanteenManagement.ViewModels
             });
 
 
-
+            //Calls it first time you open the View, so you get all the items.
             getProducts();
         }
 
@@ -70,7 +70,12 @@ namespace CanteenManagement.ViewModels
             public string fldImage { get; set; }
         }
 
-        //Made by Nicolaj
+        /*
+        Made by Nicolaj
+
+        This task will always clear the list first, as its also is used when deleting items etc.
+        It calls the API and the response is JSON of all the items in the database. This is Deserialized and added to the ObservableCollection
+        */
         async Task getProducts()
         {
             try
@@ -91,7 +96,12 @@ namespace CanteenManagement.ViewModels
             }
         }
 
-        //Made by Nicolaj
+        /*
+        Made by Nicolaj
+
+        Creates a ItemModel and gives the values from the Item. Then it returns the ItemModel.
+        This is used to fill the ObservableCollection as this is a collection of ItemModel.
+        */
         private ItemModel CreateItem(Item i)
         {
             ItemModel im = new ItemModel()
@@ -112,7 +122,12 @@ namespace CanteenManagement.ViewModels
 
 
 
-        //Made by Nicolaj
+        /*
+        Made by Nicolaj
+
+        The following code is using the HttpResponseMessage and connects to the HTTP client which calls DeleteAsync who takes the URI as parameter.
+        This works like you make a Delete action with example Postman. The deleted product is decided from the Items ID.
+        */
         static async Task<HttpStatusCode> DeleteProductAsync(int id)
         {
             HttpResponseMessage response = await ApiHelper.client.DeleteAsync(
@@ -120,7 +135,11 @@ namespace CanteenManagement.ViewModels
             return response.StatusCode;
         }
 
-        //Made by Nicolaj
+        /*
+        Made by Nicolaj
+
+        Calling the DeleteProductAsync task with the ID. After this getProducts() is called which is used to refresh the ListView through the ObservableCollection.
+        */
         async Task DeleteItem()
         {
             try

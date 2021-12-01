@@ -55,6 +55,8 @@ namespace CanteenManagement.ViewModels
             public string fldImage { get; set; }
         }
 
+        //Made by Nicolaj and Monir
+        // Not working yet, make descripton when working. <3
         static async Task UpdateItemRunAsync()
         {
 
@@ -82,6 +84,8 @@ namespace CanteenManagement.ViewModels
         }
  
 
+        //Made by Nicolaj and Monir
+        //Not working yet, make description when working <3
         static async Task<Item> UpdateProductAsync(Item item)
         {
 

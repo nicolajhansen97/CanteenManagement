@@ -16,6 +16,8 @@ using Unity;
 namespace CanteenManagement.ViewModels
 {
 
+    //Made by Nicolaj
+    //Model class used to create the item
     public class Item
     {
         public int fldCategoryTypeID { get; set; }

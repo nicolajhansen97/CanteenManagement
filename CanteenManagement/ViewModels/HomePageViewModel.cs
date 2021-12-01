@@ -15,6 +15,7 @@ namespace CanteenManagement.ViewModels
         public ICommand ChangePageCMD { get; set; }
         public ICommand ChangePageItemCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
+        public ICommand ChangePageToLunchPageCMD { get; set; }
 
         public HomePageViewModel()
         {
@@ -25,6 +26,11 @@ namespace CanteenManagement.ViewModels
             CloseProgramCMD = new RelayCommand(() =>
             {
                 System.Environment.Exit(1);
+            });
+
+            ChangePageToLunchPageCMD = new RelayCommand(() =>
+            {
+                ((App)App.Current).ChangeUserControl(App.container.Resolve<LunchPageView>());
             });
         }
     }
