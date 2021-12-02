@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Unity;
 
 namespace CanteenManagement.ViewModels
@@ -29,7 +30,7 @@ namespace CanteenManagement.ViewModels
         public ICommand ChangeToUpdateItemPageCMD { get; set; }
         public ICommand DeleteItemCMD { get; set; }
 
-        public ItemModel SelectedItem { get; set; }
+        public static ItemModel SelectedItem { get; set; }
 
         public ItemPageViewModel()
         {
@@ -109,19 +110,17 @@ namespace CanteenManagement.ViewModels
             ItemModel im = new ItemModel()
             {
                 Item = i
-                
             };
 
-            im.Category = i.fldCategoryTypeID;
-            im.Name = i.fldItemName;
-            im.Description = i.fldItemDescription;
-            im.Price = i.fldPrice;
-            im.Picture = i.fldImage;
-            im.ItemID = i.fldItemInfoID;
+            im.FldItemInfoID = i.fldItemInfoID;
+            im.FldCategoryTypeID = i.fldCategoryTypeID;
+            im.FldItemName = i.fldItemName;
+            im.FldItemDescription = i.fldItemDescription;
+            im.FldPrice = i.fldPrice;
+            im.FldImage = i.fldImage;
 
             return im;
         }
-
 
 
         /*
@@ -150,7 +149,7 @@ namespace CanteenManagement.ViewModels
 
             try
             {
-                itemID = SelectedItem.ItemID;
+                itemID = SelectedItem.FldItemInfoID;
             }
                 catch (Exception e)
             {
@@ -163,6 +162,7 @@ namespace CanteenManagement.ViewModels
                 {
                     var statusCode = await DeleteProductAsync(itemID);
                     MessageBox.Show($"Deleted (HTTP Status = {(int)statusCode})");
+
                     getProducts();
                 }
                 catch (Exception e)

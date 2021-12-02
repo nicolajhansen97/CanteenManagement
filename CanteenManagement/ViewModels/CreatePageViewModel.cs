@@ -18,15 +18,7 @@ namespace CanteenManagement.ViewModels
 
     //Made by Nicolaj
     //Model class used to create the item
-    public class Item
-    {
-        public int fldCategoryTypeID { get; set; }
-        public string fldItemName { get; set; }
-        public string fldItemDescription { get; set; }
-        public double fldPrice { get; set; }
-        public string fldImage { get; set; }
-    }
-
+  
     public class CreatePageViewModel : Bindable, ICreatePageViewModel
     {
 
@@ -38,7 +30,7 @@ namespace CanteenManagement.ViewModels
         public string ItemName { get; set; }
         public string ItemDescription { get; set; }
         public double Price { get; set; }
-        public string Image { get; set; }
+        public string Picture { get; set; }
 
 
         public CreatePageViewModel()
@@ -68,14 +60,14 @@ namespace CanteenManagement.ViewModels
             try
             {
          
-                Item item = new Item
+                ItemModel item = new ItemModel
                 {
      
-                    fldCategoryTypeID = CategoryID,
-                    fldItemName = ItemName,
-                    fldItemDescription = ItemDescription,
-                    fldPrice = Price,
-                    fldImage = Image
+                    FldCategoryTypeID = CategoryID,
+                    FldItemName = ItemName,
+                    FldItemDescription = ItemDescription,
+                    FldPrice = Price,
+                    FldImage = Picture
                 };
 
 
@@ -92,7 +84,7 @@ namespace CanteenManagement.ViewModels
 
             //Made by Nicolaj
             //Creates the item with parameter item from the other function and calls the API to create the item.
-            static async Task<Uri> CreateProductAsync(Item item)
+            static async Task<Uri> CreateProductAsync(ItemModel item)
             {
                 HttpResponseMessage response = await ApiHelper.client.PostAsJsonAsync(
                 ApiHelper.serverUrl + ApiHelper.getItems, item);

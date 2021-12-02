@@ -24,6 +24,13 @@ namespace CanteenManagement.ViewModels
         public ICommand CloseProgramCMD { get; set; }
         public ICommand UpdateItemCMD { get; set; }
 
+        //Getters and setters for the textfields.
+        public int ItemInfoID { get; set; }
+        public int CategoryID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public string Image { get; set; }
 
         public UpdateItemPageViewModel()
         {
@@ -43,37 +50,27 @@ namespace CanteenManagement.ViewModels
                 UpdateItemRunAsync();
             });
 
+            //HOW THE FUCK YOU CALL THIS EVERYTIME YOU GO BACK TO THE WINDOW RASMUS?! OR NIELS
+            setFields();
         }
-
-        public int fldItemID { get; set; }
-        public class Item
-        {
-            public int fldCategoryTypeID { get; set; }
-            public string fldItemName { get; set; }
-            public string fldItemDescription { get; set; }
-            public double fldPrice { get; set; }
-            public string fldImage { get; set; }
-        }
-
+       
         //Made by Nicolaj and Monir
         // Not working yet, make descripton when working. <3
-        static async Task UpdateItemRunAsync()
+         async Task UpdateItemRunAsync()
         {
-
-            int fldItemID = 20;
+            ItemModel item = new ItemModel();
 
             try
             {
-                // Create a new Item
-                Item item = new Item();
-
 
                 // Update the product
-                item.fldCategoryTypeID = 1;
-                item.fldItemName = "Rettet";
-                item.fldItemDescription = "VIRKER DET HER MON?";
-                item.fldPrice = 69.69;
-                item.fldImage = "DETVIRKER.COM";
+                item.FldItemInfoID = ItemInfoID;
+                item.FldCategoryTypeID = CategoryID;
+                item.FldItemName = Name;
+                item.FldItemDescription = Description;
+                item.FldPrice = Price;
+                item.FldImage = Image;
+
                 await UpdateProductAsync(item);
 
             }
@@ -86,19 +83,31 @@ namespace CanteenManagement.ViewModels
 
         //Made by Nicolaj and Monir
         //Not working yet, make description when working <3
-        static async Task<Item> UpdateProductAsync(Item item)
+         async Task<ItemModel> UpdateProductAsync(ItemModel item)
         {
 
-            HttpResponseMessage response = await ApiHelper.client.PutAsJsonAsync(ApiHelper.serverUrl + ApiHelper.getItems + "/16", item);
+            HttpResponseMessage response = await ApiHelper.client.PutAsJsonAsync(ApiHelper.serverUrl + ApiHelper.getItems + "/" + ItemInfoID, item);
 
             response.EnsureSuccessStatusCode();
 
            // // Deserialize the updated product from the response body.
-            item = await response.Content.ReadAsAsync<Item>();
+            item = await response.Content.ReadAsAsync<ItemModel>();
+
+            MessageBox.Show("Item with ID: " + ItemInfoID + " has been succesfully updated!");
+            ((App)App.Current).ChangeUserControl(App.container.Resolve<ItemView>());
 
             return item;
         }
 
+        private void setFields()
+        {
+            ItemInfoID = ItemPageViewModel.SelectedItem.FldItemInfoID;
+            CategoryID = ItemPageViewModel.SelectedItem.FldCategoryTypeID;
+            Name = ItemPageViewModel.SelectedItem.FldItemName;
+            Description = ItemPageViewModel.SelectedItem.FldItemDescription;
+            Price = ItemPageViewModel.SelectedItem.FldPrice;
+            Image = ItemPageViewModel.SelectedItem.FldImage;
+        }
 
     }
     }

@@ -64,7 +64,7 @@
             </Label>
             <TextBox
                    Grid.Column="1"
-                   Text=""
+                   Text="{Binding Name}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
             <Label Grid.Row ="1"
@@ -78,7 +78,7 @@
                 
                    Grid.Row="1"
                    Grid.Column="1"
-                   Text=""
+                   Text="{Binding Description}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="162"/>
 
@@ -93,7 +93,7 @@
                 
                    Grid.Row="2"
                    Grid.Column="1"
-                   Text=""
+                   Text="{Binding Price}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
 
@@ -108,7 +108,7 @@
                 
                    Grid.Row="3"
                    Grid.Column="1"
-                   Text=""
+                   Text="{Binding CategoryID}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
 
@@ -123,7 +123,7 @@
                 
                    Grid.Row="4"
                    Grid.Column="1"
-                   Text=""
+                   Text="{Binding Image}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
 

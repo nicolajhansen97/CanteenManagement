@@ -12,53 +12,53 @@ namespace CanteenManagement.Models
     {
         public Item Item { get; set; }
 
-        private int itemID;
+        private int fldItemInfoID;
 
-        public int ItemID
+        public int FldItemInfoID
         {
-            get { return itemID; }
-            set { itemID = value; propertyIsChanged(); }
+            get { return fldItemInfoID; }
+            set { fldItemInfoID = value; propertyIsChanged(); }
         }
 
-        private string name;
+        private string fldItemName;
 
-        public string Name
+        public string FldItemName
         {
-            get { return name; }
-            set { name = value; propertyIsChanged(); }
+            get { return fldItemName; }
+            set { fldItemName = value; propertyIsChanged(); }
         }
 
-        private string description;
+        private string fldItemDescription;
 
-        public string Description
+        public string FldItemDescription
         {
-            get { return description; }
-            set { description = value; propertyIsChanged(); }
+            get { return fldItemDescription; }
+            set { fldItemDescription = value; propertyIsChanged(); }
         }
 
 
-        private double price;
+        private double fldPrice;
 
-        public double Price
+        public double FldPrice
         {
-            get { return price; }
-            set { price = value; propertyIsChanged(); }
+            get { return fldPrice; }
+            set { fldPrice = value; propertyIsChanged(); }
         }
 
-        private int category;
+        private int fldCategoryTypeID;
 
-        public int Category
+        public int FldCategoryTypeID
         {
-            get { return category; }
-            set { category = value; propertyIsChanged(); }
+            get { return fldCategoryTypeID; }
+            set { fldCategoryTypeID = value; propertyIsChanged(); }
         }
 
-        private string picture;
+        private string fldImage;
 
-        public string Picture
+        public string FldImage
         {
-            get { return picture; }
-            set { picture = value; propertyIsChanged(); }
+            get { return fldImage; }
+            set { fldImage = value; propertyIsChanged(); }
         }
 
 

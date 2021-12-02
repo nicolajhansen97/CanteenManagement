@@ -43,11 +43,30 @@ namespace CanteenManagement.ViewModels
 
                 //MessageBox.Show(WeekNumber +" ");
 
+                GetFirstDateOfWeekByWeekNumber(2021, 42);
+                
                 return intWeekNumber;
             }
         }
 
-    
+        public DateTime GetFirstDateOfWeekByWeekNumber(int year, int weekNumber)
+        {
+            var date = new DateTime(year, 01, 01);
+          //  var firstDateOfWeek = date.DayOfWeek;
+            var result = date.AddDays(weekNumber * 7);
+
+            MessageBox.Show("Monday: " + result.AddDays(-4).Date);
+            MessageBox.Show("Tuesday: " + result.AddDays(-3).Date);
+            MessageBox.Show("Wednesday: " + result.AddDays(-2).Date);
+            MessageBox.Show("Thursday: " + result.AddDays(-1).Date);
+            MessageBox.Show("Friday: " + result.Date);
+
+
+
+            return result.AddDays(-6).Date;
+        }
+
+
     }
 
 }

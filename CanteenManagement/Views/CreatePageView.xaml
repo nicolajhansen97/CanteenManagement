@@ -124,7 +124,7 @@
                 
                    Grid.Row="4"
                    Grid.Column="1"
-                   Text="{Binding Image}"
+                   Text="{Binding Picture}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" Width="532" Height="76"/>
 

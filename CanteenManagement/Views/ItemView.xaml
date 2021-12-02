@@ -58,12 +58,12 @@
                 </ListView.ItemTemplate>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="ID" Width="45" DisplayMemberBinding="{Binding ItemID}"/>
-                        <GridViewColumn Header="Name" Width="300" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Description" Width="800" DisplayMemberBinding="{Binding Description}"/>
-                        <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding Price}"/>
-                        <GridViewColumn Header="Category" Width="150" DisplayMemberBinding="{Binding Category}"/>
-                        <GridViewColumn Header="Picture" Width="250" DisplayMemberBinding="{Binding Picture}"/>
+                        <GridViewColumn Header="ID" Width="45" DisplayMemberBinding="{Binding FldItemInfoID}"/>
+                        <GridViewColumn Header="Name" Width="300" DisplayMemberBinding="{Binding FldItemName}"/>
+                        <GridViewColumn Header="Description" Width="800" DisplayMemberBinding="{Binding FldItemDescription}"/>
+                        <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding FldPrice}"/>
+                        <GridViewColumn Header="Category" Width="150" DisplayMemberBinding="{Binding FldCategoryTypeID}"/>
+                        <GridViewColumn Header="Picture" Width="250" DisplayMemberBinding="{Binding FldImage}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
