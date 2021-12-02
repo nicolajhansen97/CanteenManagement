@@ -18,7 +18,7 @@ namespace CanteenManagement.ViewModels
 {
     public class ItemPageViewModel : Bindable, IItemPageViewModel
     {
-        private ObservableCollection<ItemModel> itemList = new ObservableCollection<ItemModel>();
+        private ObservableCollection<ItemModel> itemList = CollectionSingelton.getInstance();
         public ObservableCollection<ItemModel> ItemList
         {
             get { return itemList; }

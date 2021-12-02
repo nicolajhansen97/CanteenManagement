@@ -71,7 +71,9 @@ namespace CanteenManagement.ViewModels
                 item.FldPrice = Price;
                 item.FldImage = Image;
 
+               
                 await UpdateProductAsync(item);
+               
 
             }
             catch (Exception e)

@@ -59,10 +59,12 @@ namespace CanteenManagement.ViewModels
         {
             try
             {
-         
+                int lastID = CollectionSingelton.getInstance().Last().FldItemInfoID + 1;
+
+
                 ItemModel item = new ItemModel
                 {
-     
+
                     FldCategoryTypeID = CategoryID,
                     FldItemName = ItemName,
                     FldItemDescription = ItemDescription,
@@ -70,6 +72,18 @@ namespace CanteenManagement.ViewModels
                     FldImage = Picture
                 };
 
+                ItemModel itemForList = new ItemModel
+                {
+
+                    FldItemInfoID = lastID,
+                    FldCategoryTypeID = CategoryID,
+                    FldItemName = ItemName,
+                    FldItemDescription = ItemDescription,
+                    FldPrice = Price,
+                    FldImage = Picture
+                };
+
+                CollectionSingelton.getInstance().Add(itemForList);
 
                 var url = await CreateProductAsync(item);
                 MessageBox.Show($"Created at {url}");

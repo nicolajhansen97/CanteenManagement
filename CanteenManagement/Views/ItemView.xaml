@@ -58,7 +58,6 @@
                 </ListView.ItemTemplate>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="ID" Width="45" DisplayMemberBinding="{Binding FldItemInfoID}"/>
                         <GridViewColumn Header="Name" Width="300" DisplayMemberBinding="{Binding FldItemName}"/>
                         <GridViewColumn Header="Description" Width="800" DisplayMemberBinding="{Binding FldItemDescription}"/>
                         <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding FldPrice}"/>
