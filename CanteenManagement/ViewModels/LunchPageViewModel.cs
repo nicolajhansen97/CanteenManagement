@@ -16,15 +16,60 @@ namespace CanteenManagement.ViewModels
     {
         public ICommand ChangeToHomePageCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
+        public ICommand ChangeWeekCMD { get; set; }
 
-        public string WeekNumber { get; set; }
-        public string MondayCurrentWeek { get; set; }
-        public string TuesdayCurrentWeek { get; set; }
-        public string WednesdayCurrentWeek { get; set; }
-        public string ThursdayCurrentWeek { get; set; }
-        public string FridayCurrentWeek { get; set; }
-        public string SaturdayCurrentWeek { get; set; }
-        public string SundayCurrentWeek { get; set; }
+        private string weekNumber;
+        public string WeekNumber
+        {
+            get { return weekNumber; }
+            set { weekNumber = value; propertyIsChanged(); }
+        }
+
+        private string mondayCurrentWeek;
+        public string MondayCurrentWeek { 
+            get { return mondayCurrentWeek; } 
+            set { mondayCurrentWeek = value; propertyIsChanged(); }
+        }
+        private string tuesdayCurrentWeek;
+        public string TuesdayCurrentWeek
+        {
+            get { return tuesdayCurrentWeek; }
+            set { tuesdayCurrentWeek = value; propertyIsChanged(); }
+        }
+        private string wednesdayCurrentWeek;
+        public string WednesdayCurrentWeek
+        {
+            get { return wednesdayCurrentWeek; }
+            set { wednesdayCurrentWeek = value; propertyIsChanged(); }
+        }
+        private string thursdayCurrentWeek;
+        public string ThursdayCurrentWeek
+        {
+            get { return thursdayCurrentWeek; }
+            set { thursdayCurrentWeek = value; propertyIsChanged(); }
+        }
+        private string fridayCurrentWeek;
+        public string FridayCurrentWeek
+        {
+            get { return fridayCurrentWeek; }
+            set { fridayCurrentWeek = value; propertyIsChanged(); }
+        }
+        private string saturdayCurrentWeek;
+        public string SaturdayCurrentWeek
+        {
+            get { return saturdayCurrentWeek; }
+            set { saturdayCurrentWeek = value; propertyIsChanged(); }
+        }
+        private string sundayCurrentWeek;
+        public string SundayCurrentWeek
+        {
+            get { return sundayCurrentWeek; }
+            set { sundayCurrentWeek = value; propertyIsChanged(); }
+        }
+
+        public int yearSave = 0;
+        public int weekSave = 0;
+        public bool gotCurrentWeek;
 
         public LunchPageViewModel()
         {
@@ -37,20 +82,45 @@ namespace CanteenManagement.ViewModels
                 System.Environment.Exit(1);
             });
 
-            GetCurrentWeek();
+            ChangeWeekCMD = new RelayCommand(() => {
+                GetOtherWeeks();
+            });
+            weekSave = GetCurrentWeek();
+            AddYearAndUIWeeks();
         }
 
-        public void GetCurrentWeek()
+        public int GetCurrentWeek()
         {
+            
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
+            int intWeekNumber = ciCurr.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            return intWeekNumber;
+        }
+
+        public void AddYearAndUIWeeks()
+        {
+            int intWeekNumber = GetCurrentWeek();
+            int intYear = DateTime.Now.Year;
+
+            WeekNumber = "Current week: " + intWeekNumber;
+
+            GetWeekDates(intYear, intWeekNumber);
+        }
+
+        public void GetOtherWeeks()
+        {
+           
+            if(weekSave > 52)
             {
-                CultureInfo ciCurr = CultureInfo.CurrentCulture;
-                int intWeekNumber = ciCurr.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-                int intYear = DateTime.Now.Year;
-
-                WeekNumber = "Current week: " + intWeekNumber;
-
-                GetWeekDates(intYear, intWeekNumber);
+                yearSave++;
+                weekSave = 1;              
+                
             }
+            weekSave++;
+            GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
+           // int calculatedYear = ;
+            WeekNumber = "Week: " + weekSave + ", Year: " + (DateTime.Now.Year + yearSave);
         }
 
         public void GetWeekDates(int year, int week)

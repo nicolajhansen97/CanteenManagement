@@ -57,7 +57,7 @@
             </Grid.RowDefinitions>
             <StackPanel HorizontalAlignment="Center" Grid.Row="0" Orientation="Horizontal">
                 <Label HorizontalAlignment="Center" Margin="25" Content="{Binding WeekNumber}" FontSize="30"></Label>
-                <Button Content="->" FontSize="40" Width="100" Margin="0 0 0 0"/>
+                <Button Content="-&gt;" FontSize="40" Width="100" Command="{Binding ChangeWeekCMD}"/>
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -69,7 +69,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border Margin="25" Grid.Column="0" Background="#FFF0D8">
+                <Border Margin="10" Grid.Column="0" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -86,7 +86,7 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="25" Grid.Column="1" Background="#FFF0D8">
+                <Border Margin="10" Grid.Column="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -103,7 +103,7 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="25" Grid.Column="2" Background="#FFF0D8">
+                <Border Margin="10" Grid.Column="2" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -120,7 +120,7 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="25" Grid.Column="3" Background="#FFF0D8">
+                <Border Margin="10" Grid.Column="3" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -137,7 +137,7 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="25" Grid.Column="4" Background="#FFF0D8">
+                <Border Margin="10" Grid.Column="4" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -154,7 +154,7 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="25" Grid.Column="5" Background="#FFF0D8">
+                <Border Margin="10" Grid.Column="5" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -171,7 +171,7 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="25" Grid.Column="6" Background="#FFF0D8">
+                <Border Margin="10" Grid.Column="6" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>

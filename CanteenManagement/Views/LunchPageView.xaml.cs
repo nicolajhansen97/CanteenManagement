@@ -28,5 +28,10 @@ namespace CanteenManagement.Views
             this.DataContext = viewModel;
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
