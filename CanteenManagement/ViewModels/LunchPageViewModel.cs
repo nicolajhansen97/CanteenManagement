@@ -18,6 +18,13 @@ namespace CanteenManagement.ViewModels
         public ICommand CloseProgramCMD { get; set; }
 
         public string WeekNumber { get; set; }
+        public string MondayCurrentWeek { get; set; }
+        public string TuesdayCurrentWeek { get; set; }
+        public string WednesdayCurrentWeek { get; set; }
+        public string ThursdayCurrentWeek { get; set; }
+        public string FridayCurrentWeek { get; set; }
+        public string SaturdayCurrentWeek { get; set; }
+        public string SundayCurrentWeek { get; set; }
 
         public LunchPageViewModel()
         {
@@ -30,40 +37,55 @@ namespace CanteenManagement.ViewModels
                 System.Environment.Exit(1);
             });
 
-            LunchTest();
+            GetCurrentWeek();
         }
 
-        public int LunchTest()
+        public void GetCurrentWeek()
         {
             {
                 CultureInfo ciCurr = CultureInfo.CurrentCulture;
                 int intWeekNumber = ciCurr.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+                int intYear = DateTime.Now.Year;
 
                 WeekNumber = "Current week: " + intWeekNumber;
 
-                //MessageBox.Show(WeekNumber +" ");
-
-                GetFirstDateOfWeekByWeekNumber(2021, 42);
-                
-                return intWeekNumber;
+                GetWeekDates(intYear, intWeekNumber);
             }
         }
 
-        public DateTime GetFirstDateOfWeekByWeekNumber(int year, int weekNumber)
+        public void GetWeekDates(int year, int week)
         {
-            var date = new DateTime(year, 01, 01);
-          //  var firstDateOfWeek = date.DayOfWeek;
-            var result = date.AddDays(weekNumber * 7);
 
-            MessageBox.Show("Monday: " + result.AddDays(-4).Date);
-            MessageBox.Show("Tuesday: " + result.AddDays(-3).Date);
-            MessageBox.Show("Wednesday: " + result.AddDays(-2).Date);
-            MessageBox.Show("Thursday: " + result.AddDays(-1).Date);
-            MessageBox.Show("Friday: " + result.Date);
+            var mondayThisWeek = ISOWeek.ToDateTime(year, week, DayOfWeek.Monday);
+            
+            string mondayRemoveHours = "Monday: " + mondayThisWeek.Date;
+            mondayRemoveHours = mondayRemoveHours.Remove(mondayRemoveHours.Length-8, 8);
+            MondayCurrentWeek = mondayRemoveHours;
 
+            string tuesdayRemoveHours = "Tuesday: " + mondayThisWeek.AddDays(1).Date;
+            tuesdayRemoveHours = tuesdayRemoveHours.Remove(tuesdayRemoveHours.Length - 8, 8);
+            TuesdayCurrentWeek = tuesdayRemoveHours;
 
+            string wednesdayRemoveHours = "Wednesday: " + mondayThisWeek.AddDays(2).Date;
+            wednesdayRemoveHours = wednesdayRemoveHours.Remove(wednesdayRemoveHours.Length - 8, 8);
+            WednesdayCurrentWeek = wednesdayRemoveHours;
 
-            return result.AddDays(-6).Date;
+            string thursdayRemoveHours = "Thursday: " + mondayThisWeek.AddDays(3).Date;
+            thursdayRemoveHours = thursdayRemoveHours.Remove(thursdayRemoveHours.Length - 8, 8);
+            ThursdayCurrentWeek = thursdayRemoveHours;
+
+            string fridayRemoveHours = "Friday: " + mondayThisWeek.AddDays(4).Date;
+            fridayRemoveHours = fridayRemoveHours.Remove(fridayRemoveHours.Length - 8, 8);
+            FridayCurrentWeek = fridayRemoveHours;
+
+            string saturdayRemoveHours = "Saturday: " + mondayThisWeek.AddDays(5).Date;
+            saturdayRemoveHours = saturdayRemoveHours.Remove(saturdayRemoveHours.Length - 8, 8);
+            SaturdayCurrentWeek = saturdayRemoveHours;
+
+            string sundayRemoveHours = "Sunday: " + mondayThisWeek.AddDays(6).Date;
+            sundayRemoveHours = sundayRemoveHours.Remove(sundayRemoveHours.Length - 8, 8);
+            SundayCurrentWeek = sundayRemoveHours;
+
         }
 
 

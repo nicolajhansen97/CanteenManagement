@@ -56,7 +56,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel HorizontalAlignment="Center" Grid.Row="0" Orientation="Horizontal">
-                <Label HorizontalAlignment="Center" Margin="25" Content="WEEK 1" FontSize="30"></Label>
+                <Label HorizontalAlignment="Center" Margin="25" Content="{Binding WeekNumber}" FontSize="30"></Label>
                 <Button Content="->" FontSize="40" Width="100" Margin="0 0 0 0"/>
             </StackPanel>
             <Grid Grid.Row="1">
@@ -78,7 +78,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <Label Content="DATE" FontWeight="Bold"/>
-                            <Label Content="ACTUAL DATA"/>
+                            <Label Content="{Binding MondayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
@@ -95,7 +95,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <Label Content="DATE" FontWeight="Bold"/>
-                            <Label Content="ACTUAL DATA"/>
+                            <Label Content="{Binding TuesdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
@@ -112,7 +112,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <Label Content="DATE" FontWeight="Bold"/>
-                            <Label Content="ACTUAL DATA"/>
+                            <Label Content="{Binding WednesdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
@@ -129,7 +129,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <Label Content="DATE" FontWeight="Bold"/>
-                            <Label Content="ACTUAL DATA"/>
+                            <Label Content="{Binding ThursdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
@@ -146,7 +146,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <Label Content="DATE" FontWeight="Bold"/>
-                            <Label Content="ACTUAL DATA"/>
+                            <Label Content="{Binding FridayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
@@ -163,7 +163,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <Label Content="DATE" FontWeight="Bold"/>
-                            <Label Content="ACTUAL DATA"/>
+                            <Label Content="{Binding SaturdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
@@ -180,7 +180,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <Label Content="DATE" FontWeight="Bold"/>
-                            <Label Content="ACTUAL DATA"/>
+                            <Label Content="{Binding SundayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
