@@ -67,9 +67,9 @@ namespace CanteenManagement.ViewModels
             set { sundayCurrentWeek = value; propertyIsChanged(); }
         }
 
+        //Used to store week and year values when you move between the weeks.
         public int yearSave = 0;
         public int weekSave = 0;
-        public bool gotCurrentWeek;
 
         public LunchPageViewModel()
         {
@@ -89,6 +89,11 @@ namespace CanteenManagement.ViewModels
             AddYearAndUIWeeks();
         }
 
+
+        /* Made by Nicolaj and Niels
+         * 
+         * Gets the current week. CultureInfo is to check what Calender is used. 
+        */ 
         public int GetCurrentWeek()
         {
             
@@ -98,6 +103,10 @@ namespace CanteenManagement.ViewModels
             return intWeekNumber;
         }
 
+        /* Made by Nicolaj and Niels
+        * 
+        * Is called first time you enter the view, to be sure that you always start on the current week.
+       */
         public void AddYearAndUIWeeks()
         {
             int intWeekNumber = GetCurrentWeek();
@@ -108,21 +117,32 @@ namespace CanteenManagement.ViewModels
             GetWeekDates(intYear, intWeekNumber);
         }
 
+        /* Made by Nicolaj and Niels
+        * 
+        * Checks if the week is higher than the weeks each year. If its higher, it will add a year, and set the week to 0 again.
+        * When its called again it will begin the new year and week 1. 
+       */
         public void GetOtherWeeks()
         {
            
-            if(weekSave > 52)
+            if(weekSave > 51)
             {
                 yearSave++;
-                weekSave = 1;              
-                
+                weekSave = 0;              
             }
+
             weekSave++;
             GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
-           // int calculatedYear = ;
+
             WeekNumber = "Week: " + weekSave + ", Year: " + (DateTime.Now.Year + yearSave);
         }
 
+        /* Made by Nicolaj and Niels
+        * 
+        * Used ISOWeek to get the date of the Monday in a year and week given as a parameter.
+        * Then all the other day is calculated just by adding 1 days for each day away from Monday.
+        * The output for DateTime is yyyy:mm:dd hh:mm:ss, so delete the last 8 characters to remove the time.
+       */
         public void GetWeekDates(int year, int week)
         {
 
@@ -157,9 +177,6 @@ namespace CanteenManagement.ViewModels
             SundayCurrentWeek = sundayRemoveHours;
 
         }
-
-
     }
-
 }
 

@@ -25,12 +25,12 @@ namespace CanteenManagement.ViewModels
         public ICommand UpdateItemCMD { get; set; }
 
         //Getters and setters for the textfields.
-        public int ItemInfoID { get; set; }
-        public int CategoryID { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double Price { get; set; }
-        public string Image { get; set; }
+        public static int ItemInfoID { get; set; }
+        public static int CategoryID { get; set; }
+        public static string Name { get; set; }
+        public static string Description { get; set; }
+        public static double Price { get; set; }
+        public static string Image { get; set; }
 
         public UpdateItemPageViewModel()
         {
@@ -49,13 +49,12 @@ namespace CanteenManagement.ViewModels
             {
                 UpdateItemRunAsync();
             });
-
-            //HOW THE FUCK YOU CALL THIS EVERYTIME YOU GO BACK TO THE WINDOW RASMUS?! OR NIELS
-            setFields();
         }
        
-        //Made by Nicolaj and Monir
-        // Not working yet, make descripton when working. <3
+        /*Made by Nicolaj and Monir
+         * 
+         * Creates a instance of a new ItemModel and bound to the new input, so it will be saved as whatever is put in the textfields.
+        */
          async Task UpdateItemRunAsync()
         {
             ItemModel item = new ItemModel();
@@ -71,9 +70,13 @@ namespace CanteenManagement.ViewModels
                 item.FldPrice = Price;
                 item.FldImage = Image;
 
-               
                 await UpdateProductAsync(item);
-               
+
+                //Removes the selected item from the list.
+                CollectionSingelton.getInstance().Remove(ItemPageViewModel.SelectedItem);
+
+                //Adds the item at the list again with the updated values.
+                CollectionSingelton.getInstance().Add(item);
 
             }
             catch (Exception e)
@@ -83,8 +86,11 @@ namespace CanteenManagement.ViewModels
         }
  
 
-        //Made by Nicolaj and Monir
-        //Not working yet, make description when working <3
+        /* Made by Nicolaj 
+         * 
+         * Updates the product async. Takes the info from UpdateItemRunASync and put it as Json and updates it. 
+         * Then it changes the view back to ItemView. The exceptions will be caught at UpdateItemRunAsync so there is exception handeling.
+        */
          async Task<ItemModel> UpdateProductAsync(ItemModel item)
         {
 
@@ -92,7 +98,7 @@ namespace CanteenManagement.ViewModels
 
             response.EnsureSuccessStatusCode();
 
-           // // Deserialize the updated product from the response body.
+            // Deserialize the updated product from the response body.
             item = await response.Content.ReadAsAsync<ItemModel>();
 
             MessageBox.Show("Item with ID: " + ItemInfoID + " has been succesfully updated!");
@@ -101,7 +107,11 @@ namespace CanteenManagement.ViewModels
             return item;
         }
 
-        private void setFields()
+        /*
+        * Made by Nicolaj
+        * This function sets the field to the Selected item on the listview.
+        */
+        static public void setFields()
         {
             ItemInfoID = ItemPageViewModel.SelectedItem.FldItemInfoID;
             CategoryID = ItemPageViewModel.SelectedItem.FldCategoryTypeID;

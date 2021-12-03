@@ -51,7 +51,18 @@ namespace CanteenManagement.ViewModels
 
 
             ChangeToUpdateItemPageCMD = new RelayCommand(() => {
-                ((App)App.Current).ChangeUserControl(App.container.Resolve<UpdateItemView>());
+
+                try
+                {
+
+                    UpdateItemPageViewModel.setFields();
+                    ((App)App.Current).ChangeUserControl(App.container.Resolve<UpdateItemView>());
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error: " + e);
+                }
+                
             });
 
             DeleteItemCMD = new RelayCommand(() => {
