@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace CanteenManagement.Models
 {
-    public class CollectionSingelton
+    public class LunchSingelton
     {
-        private static ObservableCollection<Item> instance = null;
+        private static ObservableCollection<Lunch> instance = null;
 
-        public static ObservableCollection<Item> getInstance()
+        public static ObservableCollection<Lunch> getInstance()
         {
             if (instance == null)
             {
-                instance = new ObservableCollection<Item>();
+                instance = new ObservableCollection<Lunch>();
             }
             return instance;
         }

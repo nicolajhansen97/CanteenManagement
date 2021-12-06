@@ -13,8 +13,8 @@ namespace CanteenManagement.Models
     {
         public static string serverUrl = "https://localhost:44355/";
         public static string getItems = "api/TblItemInfoes";
-       // public static string createItem = "api/"
-
+        public static string getLunch = "api/TblLunches";
+       
 
         public static HttpClient client { get; set; }
 

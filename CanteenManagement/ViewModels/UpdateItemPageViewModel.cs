@@ -57,7 +57,7 @@ namespace CanteenManagement.ViewModels
         */
          async Task UpdateItemRunAsync()
         {
-            ItemModel item = new ItemModel();
+            Item item = new Item();
 
             try
             {
@@ -91,7 +91,7 @@ namespace CanteenManagement.ViewModels
          * Updates the product async. Takes the info from UpdateItemRunASync and put it as Json and updates it. 
          * Then it changes the view back to ItemView. The exceptions will be caught at UpdateItemRunAsync so there is exception handeling.
         */
-         async Task<ItemModel> UpdateProductAsync(ItemModel item)
+         async Task<Item> UpdateProductAsync(Item item)
         {
 
             HttpResponseMessage response = await ApiHelper.client.PutAsJsonAsync(ApiHelper.serverUrl + ApiHelper.getItems + "/" + ItemInfoID, item);
@@ -99,7 +99,7 @@ namespace CanteenManagement.ViewModels
             response.EnsureSuccessStatusCode();
 
             // Deserialize the updated product from the response body.
-            item = await response.Content.ReadAsAsync<ItemModel>();
+            item = await response.Content.ReadAsAsync<Item>();
 
             MessageBox.Show("Item with ID: " + ItemInfoID + " has been succesfully updated!");
             ((App)App.Current).ChangeUserControl(App.container.Resolve<ItemView>());

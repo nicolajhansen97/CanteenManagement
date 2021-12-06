@@ -62,7 +62,7 @@ namespace CanteenManagement.ViewModels
                 int lastID = CollectionSingelton.getInstance().Last().FldItemInfoID + 1;
 
 
-                ItemModel item = new ItemModel
+                Item item = new Item
                 {
 
                     FldCategoryTypeID = CategoryID,
@@ -72,7 +72,7 @@ namespace CanteenManagement.ViewModels
                     FldImage = Picture
                 };
 
-                ItemModel itemForList = new ItemModel
+                Item itemForList = new Item
                 {
 
                     FldItemInfoID = lastID,
@@ -98,7 +98,7 @@ namespace CanteenManagement.ViewModels
 
             //Made by Nicolaj
             //Creates the item with parameter item from the other function and calls the API to create the item.
-            static async Task<Uri> CreateProductAsync(ItemModel item)
+            static async Task<Uri> CreateProductAsync(Item item)
             {
                 HttpResponseMessage response = await ApiHelper.client.PostAsJsonAsync(
                 ApiHelper.serverUrl + ApiHelper.getItems, item);

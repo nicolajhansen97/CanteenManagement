@@ -1,9 +1,12 @@
 ﻿using CanteenManagement.Models;
 using CanteenManagement.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +17,12 @@ namespace CanteenManagement.ViewModels
 {
     class LunchPageViewModel : Bindable, ILunchPageViewModel
     {
+        private ObservableCollection<Lunch> lunchList = LunchSingelton.getInstance();
+        public ObservableCollection<Lunch> LunchList
+        {
+            get { return lunchList; }
+            set { lunchList = value; propertyIsChanged(); }
+        }
         public ICommand ChangeToHomePageCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
         public ICommand ChangeWeekCMD { get; set; }
@@ -66,6 +75,14 @@ namespace CanteenManagement.ViewModels
             get { return sundayCurrentWeek; }
             set { sundayCurrentWeek = value; propertyIsChanged(); }
         }
+
+        private string mondayLunchTitle;
+        public string MondayLunchTitle
+        {
+            get { return mondayLunchTitle; }
+            set { mondayLunchTitle = value; propertyIsChanged(); }
+        }
+
 
         //Used to store week and year values when you move between the weeks.
         public int yearSave = 0;
@@ -176,6 +193,32 @@ namespace CanteenManagement.ViewModels
             sundayRemoveHours = sundayRemoveHours.Remove(sundayRemoveHours.Length - 8, 8);
             SundayCurrentWeek = sundayRemoveHours;
 
+        }
+
+        async Task getLunch()
+        {
+            try
+            {
+                LunchList.Clear();
+
+                HttpResponseMessage response = await ApiHelper.client.GetAsync(ApiHelper.serverUrl + ApiHelper.getLunch);
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var lunch = JsonConvert.DeserializeObject<List<Lunch>>(responseBody);
+                lunch.ForEach((l) => LunchList.Add(l));
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        public void CheckDates()
+        {
+            //WRITE CODE NIELS!!!!
         }
     }
 }

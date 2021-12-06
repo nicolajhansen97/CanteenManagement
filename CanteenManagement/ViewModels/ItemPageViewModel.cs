@@ -18,8 +18,8 @@ namespace CanteenManagement.ViewModels
 {
     public class ItemPageViewModel : Bindable, IItemPageViewModel
     {
-        private ObservableCollection<ItemModel> itemList = CollectionSingelton.getInstance();
-        public ObservableCollection<ItemModel> ItemList
+        private ObservableCollection<Item> itemList = CollectionSingelton.getInstance();
+        public ObservableCollection<Item> ItemList
         {
             get { return itemList; }
             set { itemList = value; propertyIsChanged(); }
@@ -30,7 +30,7 @@ namespace CanteenManagement.ViewModels
         public ICommand ChangeToUpdateItemPageCMD { get; set; }
         public ICommand DeleteItemCMD { get; set; }
 
-        public static ItemModel SelectedItem { get; set; }
+        public static Item SelectedItem { get; set; }
 
         public ItemPageViewModel()
         {
@@ -74,15 +74,7 @@ namespace CanteenManagement.ViewModels
             getProducts();
         }
 
-        public class Item
-        {
-            public int fldItemInfoID { get; set; }
-            public int fldCategoryTypeID { get; set; }
-            public string fldItemName { get; set; }
-            public string fldItemDescription { get; set; }
-            public double fldPrice { get; set; }
-            public string fldImage { get; set; }
-        }
+      
 
         /*
         Made by Nicolaj
@@ -101,7 +93,7 @@ namespace CanteenManagement.ViewModels
                 string responseBody = await response.Content.ReadAsStringAsync();
 
                 var items = JsonConvert.DeserializeObject<List<Item>>(responseBody);
-                items.ForEach((i) => ItemList.Add(CreateItem(i)));
+                items.ForEach((i) => ItemList.Add(i));
             
             }
             catch (Exception e)
@@ -109,30 +101,6 @@ namespace CanteenManagement.ViewModels
                 MessageBox.Show(e.Message);
             }
         }
-
-        /*
-        Made by Nicolaj
-
-        Creates a ItemModel and gives the values from the Item. Then it returns the ItemModel.
-        This is used to fill the ObservableCollection as this is a collection of ItemModel.
-        */
-        private ItemModel CreateItem(Item i)
-        {
-            ItemModel im = new ItemModel()
-            {
-                Item = i
-            };
-
-            im.FldItemInfoID = i.fldItemInfoID;
-            im.FldCategoryTypeID = i.fldCategoryTypeID;
-            im.FldItemName = i.fldItemName;
-            im.FldItemDescription = i.fldItemDescription;
-            im.FldPrice = i.fldPrice;
-            im.FldImage = i.fldImage;
-
-            return im;
-        }
-
 
         /*
         Made by Nicolaj
