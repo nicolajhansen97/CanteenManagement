@@ -83,7 +83,7 @@
                         <Label Grid.Row="1" Content="Title" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding MondayLunchTitle}" ></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding MondayLunchDescription}" ></TextBox>
                     </Grid>
                 </Border>
                 <Border Margin="10" Grid.Column="1" Background="#FFF0D8">
@@ -100,7 +100,7 @@
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding TuesdayLunchTitle}" ></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding TuesdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
                 <Border Margin="10" Grid.Column="2" Background="#FFF0D8">
@@ -117,7 +117,7 @@
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding WednesdayLunchTitle}" ></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding WednesdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
                 <Border Margin="10" Grid.Column="3" Background="#FFF0D8">
@@ -134,7 +134,7 @@
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding ThursdayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding ThursdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
                 <Border Margin="10" Grid.Column="4" Background="#FFF0D8">
@@ -151,7 +151,7 @@
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding FridayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding FridayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
                 <Border Margin="10" Grid.Column="5" Background="#FFF0D8">
@@ -168,7 +168,7 @@
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding SaturdayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding SaturdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
                 <Border Margin="10" Grid.Column="6" Background="#FFF0D8">
@@ -185,12 +185,19 @@
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
                         <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding SundayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding SundayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
                 
             </Grid>
-            <Button Content="CLICK" Height="100" Width="300" Margin="50" FontSize="40" Grid.Row="2"/>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Save" Height="100" Width="300" Margin="50" FontSize="40" Grid.Column="0"/>
+                <Button Content="Finalize" Height="100" Width="300" Margin="50" FontSize="40" Grid.Column="1"/>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

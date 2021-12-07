@@ -125,6 +125,55 @@ namespace CanteenManagement.ViewModels
             set { sundayLunchTitle = value; propertyIsChanged(); }
         }
 
+        private string mondayLunchDescription;
+        public string MondayLunchDescription
+        {
+            get { return mondayLunchDescription; }
+            set { mondayLunchDescription = value; propertyIsChanged(); }
+        }
+
+        private string tuesdayLunchDescription;
+        public string TuesdayLunchDescription
+        {
+            get { return tuesdayLunchDescription; }
+            set { tuesdayLunchDescription = value; propertyIsChanged(); }
+        }
+
+        private string wednesdayLunchDescription;
+        public string WednesdayLunchDescription
+        {
+            get { return wednesdayLunchDescription; }
+            set { wednesdayLunchDescription = value; propertyIsChanged(); }
+        }
+
+        private string thursdayLunchDescription;
+        public string ThursdayLunchDescription
+        {
+            get { return thursdayLunchDescription; }
+            set { thursdayLunchDescription = value; propertyIsChanged(); }
+        }
+
+        private string fridayLunchDescription;
+        public string FridayLunchDescription
+        {
+            get { return fridayLunchDescription; }
+            set { fridayLunchDescription = value; propertyIsChanged(); }
+        }
+
+        private string saturdayLunchDescription;
+        public string SaturdayLunchDescription
+        {
+            get { return saturdayLunchDescription; }
+            set { saturdayLunchDescription = value; propertyIsChanged(); }
+        }
+
+        private string sundayLunchDescription;
+        public string SundayLunchDescription
+        {
+            get { return sundayLunchDescription; }
+            set { sundayLunchDescription = value; propertyIsChanged(); }
+        }
+
 
         //Used to store week and year values when you move between the weeks.
         public int yearSave = 0;
@@ -277,30 +326,37 @@ namespace CanteenManagement.ViewModels
                 if(MondayCurrentWeek.Contains(timefromDB))
                 {
                     MondayLunchTitle = item.FldMenu;
+                    MondayLunchDescription = item.FldMenuDescription;
                 }
                 else if(TuesdayCurrentWeek.Contains(timefromDB))
                 {
                     TuesdayLunchTitle = item.FldMenu;
+                    TuesdayLunchDescription = item.FldMenuDescription;
                 }
                 else if(WednesdayCurrentWeek.Contains(timefromDB))
                 {
                     WednesdayLunchTitle = item.FldMenu;
+                    WednesdayLunchDescription = item.FldMenuDescription;
                 }
                 else if (ThursdayCurrentWeek.Contains(timefromDB))
                 {
                     ThursdayLunchTitle = item.FldMenu;
+                    ThursdayLunchDescription = item.FldMenuDescription;
                 }
                 else if (FridayCurrentWeek.Contains(timefromDB))
                 {
                     FridayLunchTitle = item.FldMenu;
+                    FridayLunchDescription = item.FldMenuDescription;
                 }
                 else if (SaturdayCurrentWeek.Contains(timefromDB))
                 {
                     SaturdayLunchTitle = item.FldMenu;
+                    SaturdayLunchDescription = item.FldMenuDescription;
                 }
                 else if (SundayCurrentWeek.Contains(timefromDB))
                 {
                     SundayLunchTitle = item.FldMenu;
+                    SundayLunchDescription = item.FldMenuDescription;
                 }
             }
         }
