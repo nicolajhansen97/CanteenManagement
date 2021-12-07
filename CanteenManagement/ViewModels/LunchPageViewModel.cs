@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace CanteenManagement.ViewModels
         public ICommand ChangeToHomePageCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
         public ICommand ChangeWeekCMD { get; set; }
+        public ICommand SaveUpdateLunchCMD { get; set; }
+
 
         private string weekNumber;
         public string WeekNumber
@@ -174,6 +177,7 @@ namespace CanteenManagement.ViewModels
             set { sundayLunchDescription = value; propertyIsChanged(); }
         }
 
+        public string a; 
 
         //Used to store week and year values when you move between the weeks.
         public int yearSave = 0;
@@ -193,9 +197,14 @@ namespace CanteenManagement.ViewModels
             ChangeWeekCMD = new RelayCommand(() => {
                 GetOtherWeeks();
             });
+
+            SaveUpdateLunchCMD = new RelayCommand(() =>
+            {
+                SaveAndUpdateLunch();
+            });
+
             weekSave = GetCurrentWeek();
             AddYearAndUIWeeks();
-
             getLunch();
           
         }
@@ -245,8 +254,10 @@ namespace CanteenManagement.ViewModels
 
             weekSave++;
             GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
+           
 
             WeekNumber = "Week: " + weekSave + ", Year: " + (DateTime.Now.Year + yearSave);
+            getLunch();
         }
 
         /* Made by Nicolaj and Niels
@@ -265,27 +276,27 @@ namespace CanteenManagement.ViewModels
             MondayCurrentWeek = mondayRemoveHours;
 
             string tuesdayRemoveHours = "Tuesday: " + mondayThisWeek.AddDays(1).Date;
-            tuesdayRemoveHours = tuesdayRemoveHours.Remove(tuesdayRemoveHours.Length - 8, 8);
+            tuesdayRemoveHours = tuesdayRemoveHours.Remove(tuesdayRemoveHours.Length -9, 9);
             TuesdayCurrentWeek = tuesdayRemoveHours;
 
             string wednesdayRemoveHours = "Wednesday: " + mondayThisWeek.AddDays(2).Date;
-            wednesdayRemoveHours = wednesdayRemoveHours.Remove(wednesdayRemoveHours.Length - 8, 8);
+            wednesdayRemoveHours = wednesdayRemoveHours.Remove(wednesdayRemoveHours.Length -9, 9);
             WednesdayCurrentWeek = wednesdayRemoveHours;
 
             string thursdayRemoveHours = "Thursday: " + mondayThisWeek.AddDays(3).Date;
-            thursdayRemoveHours = thursdayRemoveHours.Remove(thursdayRemoveHours.Length - 8, 8);
+            thursdayRemoveHours = thursdayRemoveHours.Remove(thursdayRemoveHours.Length -9, 9);
             ThursdayCurrentWeek = thursdayRemoveHours;
 
             string fridayRemoveHours = "Friday: " + mondayThisWeek.AddDays(4).Date;
-            fridayRemoveHours = fridayRemoveHours.Remove(fridayRemoveHours.Length - 8, 8);
+            fridayRemoveHours = fridayRemoveHours.Remove(fridayRemoveHours.Length -9, 9);
             FridayCurrentWeek = fridayRemoveHours;
 
             string saturdayRemoveHours = "Saturday: " + mondayThisWeek.AddDays(5).Date;
-            saturdayRemoveHours = saturdayRemoveHours.Remove(saturdayRemoveHours.Length - 8, 8);
+            saturdayRemoveHours = saturdayRemoveHours.Remove(saturdayRemoveHours.Length -9, 9);
             SaturdayCurrentWeek = saturdayRemoveHours;
 
             string sundayRemoveHours = "Sunday: " + mondayThisWeek.AddDays(6).Date;
-            sundayRemoveHours = sundayRemoveHours.Remove(sundayRemoveHours.Length - 8, 8);
+            sundayRemoveHours = sundayRemoveHours.Remove(sundayRemoveHours.Length -9, 9);
             SundayCurrentWeek = sundayRemoveHours;
 
         }
@@ -315,9 +326,10 @@ namespace CanteenManagement.ViewModels
 
         public void CheckDates()
         {
+            //ClearAllProps();
             foreach (var item in LunchList)
             {
-
+                
                string timefromDB = item.FldDate;
                timefromDB = timefromDB.Remove(timefromDB.Length - 9, 9);
                timefromDB = DateTime.ParseExact(timefromDB, "yyyy-MM-dd", null).ToString("dd/MM/yyyy");
@@ -359,6 +371,136 @@ namespace CanteenManagement.ViewModels
                     SundayLunchDescription = item.FldMenuDescription;
                 }
             }
+        }
+
+        public void ClearAllProps()
+        {
+            MondayLunchTitle = "";
+            MondayLunchDescription = "";
+            TuesdayLunchTitle = "";
+            TuesdayLunchDescription = "";
+            WednesdayLunchTitle = "";
+            WednesdayLunchDescription = "";
+            ThursdayLunchTitle = "";
+            ThursdayLunchDescription = "";
+            FridayLunchTitle = "";
+            FridayLunchDescription = "";
+            SaturdayLunchTitle = "";
+            SaturdayLunchDescription = "";
+            SundayLunchTitle = "";
+            SundayLunchDescription = "";
+        }
+
+        async Task SaveAndUpdateLunch()
+        {          
+            try
+            {
+                // Update the product
+                for (int i = 0; i < 7; i++)
+                {
+                    Lunch lunch = new Lunch();
+                    switch (i)
+                    {
+                        case 0:
+                            if (!String.IsNullOrEmpty(MondayLunchTitle))
+                            {
+                               
+                                lunch.FldDate = MondayCurrentWeek.Remove(0, 8);
+                                lunch.FldMenu = MondayLunchTitle;
+                                lunch.FldMenuDescription = MondayLunchDescription;
+                                lunch.FldMenuFinalized = false;
+                            }                            
+                            break;
+                        case 1:                          
+                            if (!String.IsNullOrEmpty(TuesdayLunchTitle))
+                            {
+                                //MessageBox.Show("Tirsdag");
+                                lunch.FldDate = TuesdayCurrentWeek.Remove(0, 9);
+                                lunch.FldMenu = TuesdayLunchTitle;
+                                lunch.FldMenuDescription = TuesdayLunchDescription;
+                                lunch.FldMenuFinalized = false;
+                            }
+                            break;
+                        case 2:
+                            if (!String.IsNullOrEmpty(WednesdayLunchTitle))
+                            {
+                                //MessageBox.Show("Onsdag");
+                                lunch.FldDate = WednesdayCurrentWeek.Remove(0, 11);
+                                lunch.FldMenu = WednesdayLunchTitle;
+                                lunch.FldMenuDescription = WednesdayLunchDescription;
+                                lunch.FldMenuFinalized = false;
+                            }                            
+                            break;
+                        case 3:
+                            
+                            if (!String.IsNullOrEmpty(ThursdayLunchTitle))
+                            {
+                               // MessageBox.Show("Torsdag");
+                                lunch.FldDate = ThursdayCurrentWeek.Remove(0, 10);
+                                lunch.FldMenu = ThursdayLunchTitle;
+                                lunch.FldMenuDescription = ThursdayLunchDescription;
+                                lunch.FldMenuFinalized = false;
+                            }                          
+                            break;
+                        case 4:
+                            // code block
+                            break;
+                        case 5:
+                            // code block
+                            break;
+                        case 6:
+                            // code block
+                            break;
+                        default:
+                            // code block
+                            break;
+                    }
+                    
+                    lunch.FldDate = DateTime.ParseExact(lunch.FldDate, "dd/MM/yyyy", null).ToString("yyyy-MM-dd");
+                   
+                    foreach (var item in LunchList)
+                    {
+                       
+                        if (item.FldDate.Contains(lunch.FldDate))
+                        {                           
+                            await UpdateLunchAsync(lunch);
+                        } 
+                        else if (!String.IsNullOrEmpty(lunch.FldMenu)) //Probably MAYBE the issue is here.
+                        {
+                            MessageBox.Show("Made New Entry");
+                            await CreateLunchAsync(lunch);
+                        }
+                        
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+        }
+
+        async Task<Lunch> UpdateLunchAsync(Lunch lunch)
+        {
+            HttpResponseMessage response = await ApiHelper.client.PutAsJsonAsync(ApiHelper.serverUrl + ApiHelper.getLunch + "/" + lunch.FldDate, lunch);
+
+            response.EnsureSuccessStatusCode();
+
+            // Deserialize the updated product from the response body.
+            lunch = await response.Content.ReadAsAsync<Lunch>();
+
+            //MessageBox.Show("Lunch is updated: " + lunch.FldDate + " has been succesfully updated!");
+            return lunch;
+        }
+
+        static async Task<Uri> CreateLunchAsync(Lunch lunch)
+        {
+            HttpResponseMessage response = await ApiHelper.client.PostAsJsonAsync(
+            ApiHelper.serverUrl + ApiHelper.getLunch, lunch);
+            response.EnsureSuccessStatusCode();
+            // return URI of the created resource.
+            return response.Headers.Location;
         }
     }
 }

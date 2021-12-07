@@ -9,6 +9,12 @@ namespace CanteenManagement.Models
     //Made by Nicolaj, Rasmus, Niels
     public class Lunch : Models.Bindable
     {
+
+        public Lunch()
+        {
+            fldDate = "01/01/2000";
+        }
+
         private string fldMenu;
 
         public string FldMenu
@@ -31,6 +37,13 @@ namespace CanteenManagement.Models
         {
             get { return fldMenuDescription; }
             set { fldMenuDescription = value; }
+        }
+
+        private bool fldMenuFinalized;
+        public bool FldMenuFinalized
+        {
+            get { return fldMenuFinalized; }
+            set { fldMenuFinalized = value; }
         }
 
 

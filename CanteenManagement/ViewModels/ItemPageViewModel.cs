@@ -29,6 +29,7 @@ namespace CanteenManagement.ViewModels
         public ICommand ChangeToCreatePageCMD { get; set; }
         public ICommand ChangeToUpdateItemPageCMD { get; set; }
         public ICommand DeleteItemCMD { get; set; }
+       
 
         public static Item SelectedItem { get; set; }
 
@@ -68,6 +69,8 @@ namespace CanteenManagement.ViewModels
             DeleteItemCMD = new RelayCommand(() => {
                 DeleteItem();
             });
+
+           
 
 
             //Calls it first time you open the View, so you get all the items.
@@ -154,5 +157,7 @@ namespace CanteenManagement.ViewModels
                 MessageBox.Show("Please choose an item, before trying deleting it!");
             }
         }
+
+      
     }
 }
