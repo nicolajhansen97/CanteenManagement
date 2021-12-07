@@ -83,6 +83,48 @@ namespace CanteenManagement.ViewModels
             set { mondayLunchTitle = value; propertyIsChanged(); }
         }
 
+        private string tuesdayLunchTitle;
+        public string TuesdayLunchTitle
+        {
+            get { return tuesdayLunchTitle; }
+            set { tuesdayLunchTitle = value; propertyIsChanged(); }
+        }
+
+        private string wednesdayLunchTitle;
+        public string WednesdayLunchTitle
+        {
+            get { return wednesdayLunchTitle; }
+            set { wednesdayLunchTitle = value; propertyIsChanged(); }
+        }
+
+        private string thursdayLunchTitle;
+        public string ThursdayLunchTitle
+        {
+            get { return thursdayLunchTitle; }
+            set { thursdayLunchTitle = value; propertyIsChanged(); }
+        }
+
+        private string fridayLunchTitle;
+        public string FridayLunchTitle
+        {
+            get { return fridayLunchTitle; }
+            set { fridayLunchTitle = value; propertyIsChanged(); }
+        }
+
+        private string saturdayLunchTitle;
+        public string SaturdayLunchTitle
+        {
+            get { return saturdayLunchTitle; }
+            set { saturdayLunchTitle = value; propertyIsChanged(); }
+        }
+
+        private string sundayLunchTitle;
+        public string SundayLunchTitle
+        {
+            get { return sundayLunchTitle; }
+            set { sundayLunchTitle = value; propertyIsChanged(); }
+        }
+
 
         //Used to store week and year values when you move between the weeks.
         public int yearSave = 0;
@@ -104,7 +146,11 @@ namespace CanteenManagement.ViewModels
             });
             weekSave = GetCurrentWeek();
             AddYearAndUIWeeks();
+
+            getLunch();
+          
         }
+
 
 
         /* Made by Nicolaj and Niels
@@ -166,7 +212,7 @@ namespace CanteenManagement.ViewModels
             var mondayThisWeek = ISOWeek.ToDateTime(year, week, DayOfWeek.Monday);
             
             string mondayRemoveHours = "Monday: " + mondayThisWeek.Date;
-            mondayRemoveHours = mondayRemoveHours.Remove(mondayRemoveHours.Length-8, 8);
+            mondayRemoveHours = mondayRemoveHours.Remove(mondayRemoveHours.Length -9, 9);
             MondayCurrentWeek = mondayRemoveHours;
 
             string tuesdayRemoveHours = "Tuesday: " + mondayThisWeek.AddDays(1).Date;
@@ -209,6 +255,8 @@ namespace CanteenManagement.ViewModels
                 var lunch = JsonConvert.DeserializeObject<List<Lunch>>(responseBody);
                 lunch.ForEach((l) => LunchList.Add(l));
 
+                CheckDates();
+
             }
             catch (Exception e)
             {
@@ -218,7 +266,43 @@ namespace CanteenManagement.ViewModels
 
         public void CheckDates()
         {
-            //WRITE CODE NIELS!!!!
+            foreach (var item in LunchList)
+            {
+
+               string timefromDB = item.FldDate;
+               timefromDB = timefromDB.Remove(timefromDB.Length - 9, 9);
+               timefromDB = DateTime.ParseExact(timefromDB, "yyyy-MM-dd", null).ToString("dd/MM/yyyy");
+
+
+                if(MondayCurrentWeek.Contains(timefromDB))
+                {
+                    MondayLunchTitle = item.FldMenu;
+                }
+                else if(TuesdayCurrentWeek.Contains(timefromDB))
+                {
+                    TuesdayLunchTitle = item.FldMenu;
+                }
+                else if(WednesdayCurrentWeek.Contains(timefromDB))
+                {
+                    WednesdayLunchTitle = item.FldMenu;
+                }
+                else if (ThursdayCurrentWeek.Contains(timefromDB))
+                {
+                    ThursdayLunchTitle = item.FldMenu;
+                }
+                else if (FridayCurrentWeek.Contains(timefromDB))
+                {
+                    FridayLunchTitle = item.FldMenu;
+                }
+                else if (SaturdayCurrentWeek.Contains(timefromDB))
+                {
+                    SaturdayLunchTitle = item.FldMenu;
+                }
+                else if (SundayCurrentWeek.Contains(timefromDB))
+                {
+                    SundayLunchTitle = item.FldMenu;
+                }
+            }
         }
     }
 }

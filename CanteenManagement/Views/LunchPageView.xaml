@@ -80,8 +80,8 @@
                             <Label Content="DATE" FontWeight="Bold"/>
                             <Label Content="{Binding MondayCurrentWeek}"/>
                         </StackPanel>
-                        <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
-                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <Label Grid.Row="1" Content="Title" FontWeight="Bold" />
+                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding MondayLunchTitle}" ></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
@@ -98,7 +98,7 @@
                             <Label Content="{Binding TuesdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
-                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding TuesdayLunchTitle}" ></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
@@ -115,7 +115,7 @@
                             <Label Content="{Binding WednesdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
-                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding WednesdayLunchTitle}" ></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
@@ -132,7 +132,7 @@
                             <Label Content="{Binding ThursdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
-                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding ThursdayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
@@ -149,7 +149,7 @@
                             <Label Content="{Binding FridayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
-                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding FridayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
@@ -166,7 +166,7 @@
                             <Label Content="{Binding SaturdayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
-                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding SaturdayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
@@ -183,7 +183,7 @@
                             <Label Content="{Binding SundayCurrentWeek}"/>
                         </StackPanel>
                         <Label Grid.Row="1" Content="TITLE" FontWeight="Bold" />
-                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
+                        <TextBox Grid.Row="1" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding SundayLunchTitle}"></TextBox>
                         <Label Grid.Row="2" Content="DESCRIPTION" FontWeight="Bold"/>
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" ></TextBox>
                     </Grid>
