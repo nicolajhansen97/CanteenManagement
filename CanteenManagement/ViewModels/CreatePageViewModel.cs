@@ -72,23 +72,17 @@ namespace CanteenManagement.ViewModels
                     FldImage = Picture
                 };
 
-                Item itemForList = new Item
-                {
-
-                    FldItemInfoID = lastID,
-                    FldCategoryTypeID = CategoryID,
-                    FldItemName = ItemName,
-                    FldItemDescription = ItemDescription,
-                    FldPrice = Price,
-                    FldImage = Picture
-                };
-
-                CollectionSingelton.getInstance().Add(itemForList);
 
                 var url = await CreateProductAsync(item);
                 MessageBox.Show($"Created at {url}");
 
+
                 
+                if(!url.ToString().Contains("Access denied"))
+                { 
+                item.FldItemInfoID = lastID;
+                CollectionSingelton.getInstance().Add(item);
+                }
             }
 
             catch (Exception e)

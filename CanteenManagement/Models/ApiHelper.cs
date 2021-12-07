@@ -17,12 +17,14 @@ namespace CanteenManagement.Models
        
 
         public static HttpClient client { get; set; }
-
+     
         public static void InitializeClient()
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Add("ccp", "admin");
+            client.DefaultRequestHeaders.Add("ussr", "user");
         }
     }
 }
