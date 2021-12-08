@@ -196,8 +196,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Save" Height="100" Width="300" Margin="50" FontSize="40" Grid.Column="0" Command="{Binding SaveUpdateLunchCMD}"/>
-                <Button Content="Finalize" Height="100" Width="300" Margin="50" FontSize="40" Grid.Column="1"/>
+                <Button Content="Save" Height="100" Width="300" Margin="50" FontSize="40" Grid.Column="0" Command="{Binding SaveUpdateLunchCMD}" CommandParameter="save"/>
+                <Button Content="Finalize" Height="100" Width="300" Margin="50" FontSize="40" Grid.Column="1" Command="{Binding FinalizeLunchCMD}" CommandParameter="final"/>
             </Grid>
         </Grid>
     </Grid>
