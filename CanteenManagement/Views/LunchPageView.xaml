@@ -56,8 +56,9 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel HorizontalAlignment="Center" Grid.Row="0" Orientation="Horizontal">
+                <Button Content="&lt;-" FontSize="40" Width="100" Command="{Binding ChangeWeekMinusCMD}" Margin="0,20,0,20"/>
                 <Label HorizontalAlignment="Center" Margin="25" Content="{Binding WeekNumber}" FontSize="30"></Label>
-                <Button Content="-&gt;" FontSize="40" Width="100" Command="{Binding ChangeWeekCMD}"/>
+                <Button Content="-&gt;" FontSize="40" Width="100" Command="{Binding ChangeWeekPlusCMD}" Margin="0,20,0,20"/>
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

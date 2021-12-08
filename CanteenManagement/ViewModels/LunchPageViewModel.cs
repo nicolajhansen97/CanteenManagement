@@ -26,7 +26,8 @@ namespace CanteenManagement.ViewModels
         }
         public ICommand ChangeToHomePageCMD { get; set; }
         public ICommand CloseProgramCMD { get; set; }
-        public ICommand ChangeWeekCMD { get; set; }
+        public ICommand ChangeWeekMinusCMD { get; set; }
+        public ICommand ChangeWeekPlusCMD { get; set; }
         public ICommand SaveUpdateLunchCMD { get; set; }
 
 
@@ -177,8 +178,6 @@ namespace CanteenManagement.ViewModels
             set { sundayLunchDescription = value; propertyIsChanged(); }
         }
 
-        public string a; 
-
         //Used to store week and year values when you move between the weeks.
         public int yearSave = 0;
         public int weekSave = 0;
@@ -194,8 +193,12 @@ namespace CanteenManagement.ViewModels
                 System.Environment.Exit(1);
             });
 
-            ChangeWeekCMD = new RelayCommand(() => {
-                GetOtherWeeks();
+            ChangeWeekMinusCMD = new RelayCommand(() => {
+                GetOtherWeeksMinus();
+            });
+
+            ChangeWeekPlusCMD = new RelayCommand(() => {
+                GetOtherWeeksPlus();
             });
 
             SaveUpdateLunchCMD = new RelayCommand(() =>
@@ -243,7 +246,23 @@ namespace CanteenManagement.ViewModels
         * Checks if the week is higher than the weeks each year. If its higher, it will add a year, and set the week to 0 again.
         * When its called again it will begin the new year and week 1. 
        */
-        public void GetOtherWeeks()
+
+        public void GetOtherWeeksMinus()
+        {
+            if(weekSave < 2)
+            {
+                yearSave--;
+                weekSave = 53;
+            }
+
+            weekSave--;
+            GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
+
+
+            WeekNumber = "Week: " + weekSave + ", Year: " + (DateTime.Now.Year + yearSave);
+            getLunch();
+        }
+        public void GetOtherWeeksPlus()
         {
            
             if(weekSave > 51)
@@ -440,19 +459,41 @@ namespace CanteenManagement.ViewModels
                                 lunch.FldMenu = ThursdayLunchTitle;
                                 lunch.FldMenuDescription = ThursdayLunchDescription;
                                 lunch.FldMenuFinalized = false;
-                            }                          
+                            }
                             break;
                         case 4:
-                            // code block
+
+                            if (!String.IsNullOrEmpty(FridayLunchTitle))
+                            {
+                                // MessageBox.Show("Fredag");
+                                lunch.FldDate = FridayCurrentWeek.Remove(0, 8);
+                                lunch.FldMenu = FridayLunchTitle;
+                                lunch.FldMenuDescription = FridayLunchDescription;
+                                lunch.FldMenuFinalized = false;
+                            }
                             break;
                         case 5:
-                            // code block
+                            if (!String.IsNullOrEmpty(SaturdayLunchTitle))
+                            {
+                                // MessageBox.Show("Lørdag");
+                                lunch.FldDate = SaturdayCurrentWeek.Remove(0, 10);
+                                lunch.FldMenu = SaturdayLunchTitle;
+                                lunch.FldMenuDescription = SaturdayLunchDescription;
+                                lunch.FldMenuFinalized = false;
+                            }
                             break;
                         case 6:
-                            // code block
+                            if (!String.IsNullOrEmpty(SundayLunchTitle))
+                            {
+                                // MessageBox.Show("Søndag");
+                                lunch.FldDate = SundayCurrentWeek.Remove(0, 8);
+                                lunch.FldMenu = SundayLunchTitle;
+                                lunch.FldMenuDescription = SundayLunchDescription;
+                                lunch.FldMenuFinalized = false;
+                            }
                             break;
                         default:
-                            // code block
+                                MessageBox.Show("DEFAULT");
                             break;
                     }
                     

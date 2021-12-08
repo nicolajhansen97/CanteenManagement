@@ -11,7 +11,7 @@ namespace CanteenManagement.Models
     //Made by Nicolaj
     class ApiHelper
     {
-        public static string serverUrl = "https://localhost:5001/";
+        public static string serverUrl = "https://localhost:44355/";
         public static string getItems = "api/TblItemInfoes";
         public static string getLunch = "api/TblLunches";
        
