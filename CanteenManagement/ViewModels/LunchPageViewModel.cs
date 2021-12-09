@@ -262,9 +262,10 @@ namespace CanteenManagement.ViewModels
             {
                 yearSave--;
                 weekSave = 53;
-            }
+            }        
 
             weekSave--;
+            MessageBox.Show("THis is weeksave -: " + weekSave);
             GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
 
 
@@ -279,8 +280,10 @@ namespace CanteenManagement.ViewModels
                 yearSave++;
                 weekSave = 0;              
             }
-
+            
+           
             weekSave++;
+            MessageBox.Show("THis is weeksave +: " + weekSave);
             GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
            
 
@@ -296,7 +299,7 @@ namespace CanteenManagement.ViewModels
             if (weekSave < 2)
             {              
                 yearSaveForFinal--;
-                weekSave = 53;
+                tempWeek = 52;
             }
 
             tempWeek--;
@@ -445,6 +448,7 @@ namespace CanteenManagement.ViewModels
         {          
             try
             {
+                bool finalizedValuesCheck = false;
                 bool isNotFinalized = false;
                 // Update the product
                 for (int i = 0; i < 7; i++)
@@ -539,36 +543,37 @@ namespace CanteenManagement.ViewModels
 
                     foreach (var item in LunchList)
                     {
-                         if (commandParam.ToString().Equals("final"))
-                         {                                                        
-                             foreach (var item2 in tempDateList)
-                             {                              
-                                 //MessageBox.Show(item2 + " | " + item.FldDate + " | Is not finalised? " + !item.FldMenuFinalized + " | Is not empty? " + !String.IsNullOrEmpty(lunch.FldMenu));
-                                 //MessageBox.Show(item2 + " | " + cunt);
-                                 if ((item.FldDate.Contains(item2) && !item.FldMenuFinalized
-                                   || item.FldDate.Contains(lunch.FldDate) && item.FldMenuFinalized) && !String.IsNullOrEmpty(lunch.FldMenu))
-                                 {
+                        if (commandParam.ToString().Equals("final"))
+                        {                                                        
+                            foreach (var item2 in tempDateList)
+                            {                              
+                                //MessageBox.Show(item2 + " | " + item.FldDate + " | Is not finalised? " + !item.FldMenuFinalized + " | Is not empty? " + !String.IsNullOrEmpty(lunch.FldMenu));
+                                //MessageBox.Show(item2 + " | " + cunt);
+                                if ((item.FldDate.Contains(item2) && !item.FldMenuFinalized
+                                  || item.FldDate.Contains(lunch.FldDate) && item.FldMenuFinalized) && !String.IsNullOrEmpty(lunch.FldMenu))
+                                {
 
-                                     MessageBox.Show("Got in! ");
-                                     isNotFinalized = true;
-                                 }
-                             }
-                             /*
-                             if (isNotFinalized != false)
-                             {
-                                 MessageBox.Show(lunch.FldMenu + " : Was just finalized");
-                                 lunch.FldMenuFinalized = true;
-                             }
-                             */
-                         } else if (commandParam.ToString().Equals("save") && !item.FldMenuFinalized)
-                           {
-                             //lunch.FldMenuFinalized = false;
-                         }
+                                    //MessageBox.Show("Got in! ");
+                                    isNotFinalized = true;
+
+                                }
+                            }
+                            /*
+                            if (isNotFinalized != false)
+                            {
+                                MessageBox.Show(lunch.FldMenu + " : Was just finalized");
+                                lunch.FldMenuFinalized = true;
+                            }
+                            */
+                        } else if (commandParam.ToString().Equals("save"))
+                        {
+                            isNotFinalized = true;
+                        }
 
                        
                         //MessageBox.Show(tempDateList.ElementAt(0) + " <-- Old date | New date --> " + item.FldDate);
 
-                        if ((!String.IsNullOrEmpty(lunch.FldMenu) && item.FldDate.Contains(lunch.FldDate)) || !item.FldMenuFinalized)
+                        if ((!String.IsNullOrEmpty(lunch.FldMenu) && item.FldDate.Contains(lunch.FldDate)) && !item.FldMenuFinalized)
                         {                            
                             x = true;
                             if (isNotFinalized == false)
@@ -584,9 +589,17 @@ namespace CanteenManagement.ViewModels
                             //MessageBox.Show(lunch.FldMenu + " : Is updated");
                             await UpdateLunchAsync(lunch);
                         }
+
+                        if (!String.IsNullOrEmpty(lunch.FldMenu) && item.FldDate.Contains(lunch.FldDate) && item.FldMenuFinalized)
+                        {
+                            MessageBox.Show("There is finalized item");
+                            finalizedValuesCheck = true;
+                            
+                        }
+
                         //Tilføj noget der kan finde ud af om dagen har været finalized!!!!!!!!!!
                     }
-                    if (!String.IsNullOrEmpty(lunch.FldMenu) && !x)
+                    if (!String.IsNullOrEmpty(lunch.FldMenu) && !x && !finalizedValuesCheck)
                     {
                         if (isNotFinalized == false)
                         {
