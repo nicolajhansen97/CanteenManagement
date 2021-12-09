@@ -4,6 +4,8 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using CanteenManagement.ViewModels;
+using CanteenManagement.Models;
+using System.Collections.Generic;
 
 namespace CanteenTest
 {
@@ -38,13 +40,17 @@ namespace CanteenTest
         public void Test2()
         {
             //make data
-
+            List<LunchBooking> list = new List<LunchBooking>();
+            list.Add(new LunchBooking { fldLunchBookingID=1,fldEmployeeID=1,fldDate="2021-12-07"});
+            list.Add(new LunchBooking { fldLunchBookingID = 2, fldEmployeeID = 1, fldDate = "2021-12-08" });
+            list.Add(new LunchBooking { fldLunchBookingID = 3, fldEmployeeID = 2, fldDate = "2021-12-07" });
+            list.Add(new LunchBooking { fldLunchBookingID = 4, fldEmployeeID = 1, fldDate = "2021-12-08" });
             //activate mehtod
             LunchPageViewModel lunch = new LunchPageViewModel();
-            lunch.CalcuateBookingsForDate("");
-          
+            int testValue = lunch.CalcuateBookingsForDate("2021-12-07",list);
 
             //assert value
+            Assert.IsTrue(testValue == 2);
         }
 
 

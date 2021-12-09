@@ -275,36 +275,27 @@ namespace CanteenManagement.ViewModels
                 //date to weeknumber
                 foreach (var item in LunchBookings)
                 {
-                    int amount = CalcuateBookingsForDate(item.fldDate);
+                    int amount = CalcuateBookingsForDate(item.fldDate,LunchBookings);
+                    //if / switch get week and day. input amount
                 }
                 
-
-                //Calculate number of people for each day of current week (next week)
-
-
-                //if checker for uge numre og så gir values ud fra det.
             });
-
-            //mondayNumber = getLunchBookingData(41,"monday");
-            //tuesdayNumber = getLunchBookingData(41, "tuesday");
-            //wensdayNumber = getLunchBookingData(41, "wensday");
-            //thursdayNumber = getLunchBookingData(41, "thursday");
-            //fridayNumber = getLunchBookingData(41, "friday");
-            //saturdayNumber = getLunchBookingData(41, "saturday");
-            //sundayNumber = getLunchBookingData(41, "sunday");
         }
 
-        public int CalcuateBookingsForDate(string date)
+        public int CalcuateBookingsForDate(string date,List<LunchBooking> lunchBookings)
         {
-            return 0;
+            int count = 0;
+            foreach (var item in lunchBookings)
+            {
+                if (item.fldDate == date)
+                {
+                    count++;
+                }
+            }
+            return count;
         } 
 
-
-
         public List<LunchBooking> LunchBookings = new List<LunchBooking>();
-
-      
-
 
         public async Task<List<LunchBooking>> GetNumberOfEmployeesLunchOrderDate()
         {
