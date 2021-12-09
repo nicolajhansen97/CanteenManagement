@@ -61,6 +61,10 @@
                 <Button Content="-&gt;" FontSize="40" Width="100" Command="{Binding ChangeWeekPlusCMD}" Margin="0,20,0,20"/>
             </StackPanel>
             <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -70,7 +74,11 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border Margin="10" Grid.Column="0" Background="#FFF0D8">
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Number of people:" FontWeight="Bold"/>
+                    <Label Content="{Binding mondayNumber}" FontWeight="Bold"/>
+                </StackPanel>
+                <Border Margin="10" Grid.Column="0" Grid.Row="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -87,7 +95,11 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding MondayLunchDescription}" ></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="10" Grid.Column="1" Background="#FFF0D8">
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Number of people:" FontWeight="Bold"/>
+                    <Label Content="{Binding tuesdayNumber}" FontWeight="Bold"/>
+                </StackPanel>
+                <Border Margin="10" Grid.Column="1" Grid.Row="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -104,7 +116,11 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding TuesdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="10" Grid.Column="2" Background="#FFF0D8">
+                <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Number of people:" FontWeight="Bold"/>
+                    <Label Content="{Binding wensdayNumber}" FontWeight="Bold"/>
+                </StackPanel>
+                <Border Margin="10" Grid.Column="2" Grid.Row="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -121,7 +137,11 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding WednesdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="10" Grid.Column="3" Background="#FFF0D8">
+                <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Number of people:" FontWeight="Bold"/>
+                    <Label Content="{Binding thursdayNumber}" FontWeight="Bold"/>
+                </StackPanel>
+                <Border Margin="10" Grid.Column="3" Grid.Row="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -138,7 +158,11 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding ThursdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="10" Grid.Column="4" Background="#FFF0D8">
+                <StackPanel Grid.Column="4" Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Number of people:" FontWeight="Bold"/>
+                    <Label Content="{Binding fridayNumber}" FontWeight="Bold"/>
+                </StackPanel>
+                <Border Margin="10" Grid.Column="4" Grid.Row="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -155,7 +179,11 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding FridayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="10" Grid.Column="5" Background="#FFF0D8">
+                <StackPanel Grid.Column="5" Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Number of people:" FontWeight="Bold"/>
+                    <Label Content="{Binding saturdayNumber}" FontWeight="Bold"/>
+                </StackPanel>
+                <Border Margin="10" Grid.Column="5" Grid.Row="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -172,7 +200,11 @@
                         <TextBox Grid.Row="2" Margin="0 30 0 0" TextWrapping="Wrap" Text="{Binding SaturdayLunchDescription}"></TextBox>
                     </Grid>
                 </Border>
-                <Border Margin="10" Grid.Column="6" Background="#FFF0D8">
+                <StackPanel Grid.Column="6" Grid.Row="0" Orientation="Horizontal">
+                    <Label Content="Number of people:" FontWeight="Bold"/>
+                    <Label Content="{Binding sundayNumber}" FontWeight="Bold"/>
+                </StackPanel>
+                <Border Margin="10" Grid.Column="6" Grid.Row="1" Background="#FFF0D8">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>

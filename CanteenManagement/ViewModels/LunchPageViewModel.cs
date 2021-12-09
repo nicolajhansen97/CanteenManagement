@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
@@ -16,7 +17,7 @@ using Unity;
 
 namespace CanteenManagement.ViewModels
 {
-    class LunchPageViewModel : Bindable, ILunchPageViewModel
+    public class LunchPageViewModel : Bindable, ILunchPageViewModel
     {
         
         private ObservableCollection<Lunch> lunchList = LunchSingelton.getInstance();
@@ -33,6 +34,48 @@ namespace CanteenManagement.ViewModels
         public ICommand SaveUpdateLunchCMD { get; set; }
         public ICommand FinalizeLunchCMD { get; set; }
 
+        private string _mondayNumber;
+        public string mondayNumber
+        {
+            get { return _mondayNumber; }
+            set { _mondayNumber = value; propertyIsChanged(); }
+        }
+        private string _tuesdayNumber;
+        public string tuesdayNumber
+        {
+            get { return _tuesdayNumber; }
+            set { _tuesdayNumber = value; propertyIsChanged(); }
+        }
+        private string _wensdayNumber;
+        public string wensdayNumber
+        {
+            get { return _wensdayNumber; }
+            set { _wensdayNumber = value; propertyIsChanged(); }
+        }
+        private string _thursdayNumber;
+        public string thursdayNumber
+        {
+            get { return _thursdayNumber; }
+            set { _thursdayNumber = value; propertyIsChanged(); }
+        }
+        private string _fridayNumber;
+        public string fridayNumber
+        {
+            get { return _fridayNumber; }
+            set { _fridayNumber = value; propertyIsChanged(); }
+        }
+        private string _saturdayNumber;
+        public string saturdayNumber
+        {
+            get { return _saturdayNumber; }
+            set { _saturdayNumber = value; propertyIsChanged(); }
+        }
+        private string _sundayNumber;
+        public string sundayNumber
+        {
+            get { return _sundayNumber; }
+            set { _sundayNumber = value; propertyIsChanged(); }
+        }
 
         private string weekNumber;
         public string WeekNumber
@@ -217,8 +260,89 @@ namespace CanteenManagement.ViewModels
 
             weekSave = GetCurrentWeek();
             AddYearAndUIWeeks();
-            getLunch();
-          
+            startAsyncMethods(2);
+
+
+            //lunch numbers
+            //Task.WaitAll();
+            //TESTLUNCHBOOKING();
+
+            //TestTASK
+
+            Task.Run(async () => {
+                //store lunchbooking in array
+                LunchBookings = await GetNumberOfEmployeesLunchOrderDate();
+                //date to weeknumber
+                foreach (var item in LunchBookings)
+                {
+                    int amount = CalcuateBookingsForDate(item.fldDate);
+                }
+                
+
+                //Calculate number of people for each day of current week (next week)
+
+
+                //if checker for uge numre og så gir values ud fra det.
+            });
+
+            //mondayNumber = getLunchBookingData(41,"monday");
+            //tuesdayNumber = getLunchBookingData(41, "tuesday");
+            //wensdayNumber = getLunchBookingData(41, "wensday");
+            //thursdayNumber = getLunchBookingData(41, "thursday");
+            //fridayNumber = getLunchBookingData(41, "friday");
+            //saturdayNumber = getLunchBookingData(41, "saturday");
+            //sundayNumber = getLunchBookingData(41, "sunday");
+        }
+
+        public int CalcuateBookingsForDate(string date)
+        {
+            return 0;
+        } 
+
+
+
+        public List<LunchBooking> LunchBookings = new List<LunchBooking>();
+
+        public async void startAsyncMethods(int method)
+        {
+            switch (method)
+            {
+                case 1:
+                    await SaveAndUpdateLunch();
+                    break;
+                case 2:
+                    await getLunch();
+                    break;
+            }
+        }
+
+
+        public async Task<List<LunchBooking>> GetNumberOfEmployeesLunchOrderDate()
+        {
+            //make api lunchbooking call
+            HttpResponseMessage response = await ApiHelper.client.GetAsync(ApiHelper.serverUrl + ApiHelper.getLunchBooking);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            var lunchbooking = JsonConvert.DeserializeObject<List<LunchBooking>>(responseBody);
+
+            List<LunchBooking> lunchBookings = new List<LunchBooking>();
+
+            foreach (var item in lunchbooking)
+            {
+                lunchBookings.Add(new LunchBooking { fldLunchBookingID=item.fldLunchBookingID,fldEmployeeID=item.fldEmployeeID,fldDate=item.fldDate});
+            }
+
+            Console.WriteLine("");
+
+            //do either linq with with weekday and weeknumber or do a if with loop to get that data
+
+            //get number of people
+
+            //return that
+            Task.WaitAll();
+            return await Task.FromResult(lunchBookings);
         }
 
 
