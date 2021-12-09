@@ -260,7 +260,7 @@ namespace CanteenManagement.ViewModels
 
             weekSave = GetCurrentWeek();
             AddYearAndUIWeeks();
-            startAsyncMethods(2);
+            getLunch();
 
 
             //lunch numbers
@@ -303,18 +303,7 @@ namespace CanteenManagement.ViewModels
 
         public List<LunchBooking> LunchBookings = new List<LunchBooking>();
 
-        public async void startAsyncMethods(int method)
-        {
-            switch (method)
-            {
-                case 1:
-                    await SaveAndUpdateLunch();
-                    break;
-                case 2:
-                    await getLunch();
-                    break;
-            }
-        }
+      
 
 
         public async Task<List<LunchBooking>> GetNumberOfEmployeesLunchOrderDate()
