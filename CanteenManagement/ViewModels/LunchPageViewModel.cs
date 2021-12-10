@@ -262,26 +262,67 @@ namespace CanteenManagement.ViewModels
             AddYearAndUIWeeks();
             getLunch();
 
-
-            //lunch numbers
-            //Task.WaitAll();
-            //TESTLUNCHBOOKING();
-
-            //TestTASK
-
             Task.Run(async () => {
                 //store lunchbooking in array
                 LunchBookings = await GetNumberOfEmployeesLunchOrderDate();
-                //date to weeknumber
                 foreach (var item in LunchBookings)
                 {
-                    int amount = CalcuateBookingsForDate(item.fldDate,LunchBookings);
-                    //if / switch get week and day. input amount
+                    item.fldDate = item.fldDate.Replace("T00:00:00", "");
                 }
-                
+                CalculateAmounteOfBookingForWeek(GetCurrentWeek(), DateTime.Now.Year);
             });
         }
 
+        /// <summary>
+        /// @author: Rasmus og Monir
+        /// </summary>
+        /// <param name="week"></param>
+        /// <param name="year"></param>
+        public void CalculateAmounteOfBookingForWeek(int week, int year)
+        {
+            //NEEDS TO BE MOVED DOWN TO OWN METHOD LATER
+            //date to weeknumber
+            List<string> weekDates = new List<string>(); 
+            weekDates.AddRange(WeekPrior(year, week));
+
+            for (int i = 0; i < weekDates.Count; i++)
+            {
+                string test = weekDates[i];
+                int amount = CalcuateBookingsForDate(test, LunchBookings);
+                //if / switch get week and day. input amount
+                switch (i)
+                {
+                    case 0:
+                        mondayNumber = amount+"";
+                        break;
+                    case 1:
+                        tuesdayNumber = amount + "";
+                        break;
+                    case 2:
+                        wensdayNumber = amount + "";
+                        break;
+                    case 3:
+                        thursdayNumber = amount + "";
+                        break;
+                    case 4:
+                        fridayNumber = amount + "";
+                        break;
+                    case 5:
+                        saturdayNumber = amount + "";
+                        break;
+                    case 6:
+                        sundayNumber = amount + "";
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// @author: Rasmus og Monir
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="lunchBookings"></param>
+        /// <returns></returns>
         public int CalcuateBookingsForDate(string date,List<LunchBooking> lunchBookings)
         {
             int count = 0;
@@ -297,35 +338,34 @@ namespace CanteenManagement.ViewModels
 
         public List<LunchBooking> LunchBookings = new List<LunchBooking>();
 
+        /// <summary>
+        /// @author: Rasmus og Monir
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<LunchBooking>> GetNumberOfEmployeesLunchOrderDate()
         {
             //make api lunchbooking call
-            HttpResponseMessage response = await ApiHelper.client.GetAsync(ApiHelper.serverUrl + ApiHelper.getLunchBooking);
-            response.EnsureSuccessStatusCode();
-
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            var lunchbooking = JsonConvert.DeserializeObject<List<LunchBooking>>(responseBody);
-
             List<LunchBooking> lunchBookings = new List<LunchBooking>();
-
-            foreach (var item in lunchbooking)
+            try
             {
-                lunchBookings.Add(new LunchBooking { fldLunchBookingID=item.fldLunchBookingID,fldEmployeeID=item.fldEmployeeID,fldDate=item.fldDate});
+                HttpResponseMessage response = await ApiHelper.client.GetAsync(ApiHelper.serverUrl + ApiHelper.getLunchBooking);
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var lunchbooking = JsonConvert.DeserializeObject<List<LunchBooking>>(responseBody);
+
+                foreach (var item in lunchbooking)
+                {
+                    lunchBookings.Add(new LunchBooking { fldLunchBookingID = item.fldLunchBookingID, fldEmployeeID = item.fldEmployeeID, fldDate = item.fldDate });
+                }
+
+                Task.WaitAll();
             }
+            catch (Exception e) { MessageBox.Show(e.Message); }
 
-            Console.WriteLine("");
-
-            //do either linq with with weekday and weeknumber or do a if with loop to get that data
-
-            //get number of people
-
-            //return that
-            Task.WaitAll();
             return await Task.FromResult(lunchBookings);
         }
-
-
 
         /* Made by Nicolaj and Niels
          * 
@@ -375,6 +415,7 @@ namespace CanteenManagement.ViewModels
 
             WeekNumber = "Week: " + weekSave + ", Year: " + (DateTime.Now.Year + yearSave);
             getLunch();
+            CalculateAmounteOfBookingForWeek(weekSave, DateTime.Now.Year + yearSave);
         }
         public void GetOtherWeeksPlus()
         {
@@ -393,6 +434,7 @@ namespace CanteenManagement.ViewModels
 
             WeekNumber = "Week: " + weekSave + ", Year: " + (DateTime.Now.Year + yearSave);
             getLunch();
+            CalculateAmounteOfBookingForWeek(weekSave, DateTime.Now.Year + yearSave);
         }
 
 
@@ -755,43 +797,44 @@ namespace CanteenManagement.ViewModels
         {
             List<string> dateList = new List<string>();
             var mondayThisWeek = ISOWeek.ToDateTime(year, week, DayOfWeek.Monday);
-            
+            string[] formats = { "dd-MM-yyyy", "dd/MM/yyyy" };
+
+
             //DateTime.ParseExact(str, formats, CultureInfo.InvariantCulture, DateTimeStyles.None);
             //cunt = DateTime.ParseExact(lunch.FldDate, "yyyy-MM-dd", null).ToString("dd/MM/yyyy");
-
             string mondayRemoveHours = mondayThisWeek.Date.ToString();
-            mondayRemoveHours = mondayRemoveHours.Remove(mondayRemoveHours.Length - 9, 9);   
-            mondayRemoveHours = DateTime.ParseExact(mondayRemoveHours, "dd-MM-yyyy", null).ToString("yyyy-MM-dd");
+            mondayRemoveHours = mondayRemoveHours.Remove(mondayRemoveHours.Length - 9, 9);
+            mondayRemoveHours = DateTime.ParseExact(mondayRemoveHours, formats, null).ToString("yyyy-MM-dd");
             dateList.Add(mondayRemoveHours);
 
             string tuesdayRemoveHours = mondayThisWeek.AddDays(1).Date.ToString();
             tuesdayRemoveHours = tuesdayRemoveHours.Remove(tuesdayRemoveHours.Length - 9, 9);
-            tuesdayRemoveHours = DateTime.ParseExact(tuesdayRemoveHours, "dd-MM-yyyy", null).ToString("yyyy-MM-dd");
+            tuesdayRemoveHours = DateTime.ParseExact(tuesdayRemoveHours, formats, null).ToString("yyyy-MM-dd");
             dateList.Add(tuesdayRemoveHours);
 
             string wednesdayRemoveHours = mondayThisWeek.AddDays(2).Date.ToString();
             wednesdayRemoveHours = wednesdayRemoveHours.Remove(wednesdayRemoveHours.Length - 9, 9);
-            wednesdayRemoveHours = DateTime.ParseExact(wednesdayRemoveHours, "dd-MM-yyyy", null).ToString("yyyy-MM-dd");
+            wednesdayRemoveHours = DateTime.ParseExact(wednesdayRemoveHours, formats, null).ToString("yyyy-MM-dd");
             dateList.Add(wednesdayRemoveHours);
 
             string thursdayRemoveHours = mondayThisWeek.AddDays(3).Date.ToString();
             thursdayRemoveHours = thursdayRemoveHours.Remove(thursdayRemoveHours.Length - 9, 9);
-            thursdayRemoveHours = DateTime.ParseExact(thursdayRemoveHours, "dd-MM-yyyy", null).ToString("yyyy-MM-dd");
+            thursdayRemoveHours = DateTime.ParseExact(thursdayRemoveHours, formats, null).ToString("yyyy-MM-dd");
             dateList.Add(thursdayRemoveHours);
 
             string fridayRemoveHours = mondayThisWeek.AddDays(4).Date.ToString();
             fridayRemoveHours = fridayRemoveHours.Remove(fridayRemoveHours.Length - 9, 9);
-            fridayRemoveHours = DateTime.ParseExact(fridayRemoveHours, "dd-MM-yyyy", null).ToString("yyyy-MM-dd");
+            fridayRemoveHours = DateTime.ParseExact(fridayRemoveHours, formats, null).ToString("yyyy-MM-dd");
             dateList.Add(fridayRemoveHours);
 
             string saturdayRemoveHours = mondayThisWeek.AddDays(5).Date.ToString();
             saturdayRemoveHours = saturdayRemoveHours.Remove(saturdayRemoveHours.Length - 9, 9);
-            saturdayRemoveHours = DateTime.ParseExact(saturdayRemoveHours, "dd-MM-yyyy", null).ToString("yyyy-MM-dd");
+            saturdayRemoveHours = DateTime.ParseExact(saturdayRemoveHours, formats, null).ToString("yyyy-MM-dd");
             dateList.Add(saturdayRemoveHours);
 
             string sundayRemoveHours = mondayThisWeek.AddDays(6).Date.ToString();
             sundayRemoveHours = sundayRemoveHours.Remove(sundayRemoveHours.Length - 9, 9);
-            sundayRemoveHours = DateTime.ParseExact(sundayRemoveHours, "dd-MM-yyyy", null).ToString("yyyy-MM-dd");
+            sundayRemoveHours = DateTime.ParseExact(sundayRemoveHours, formats, null).ToString("yyyy-MM-dd");
             dateList.Add(sundayRemoveHours);
 
             return dateList;

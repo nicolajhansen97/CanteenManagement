@@ -41,7 +41,7 @@ namespace CanteenTest
         {
             //make data
             List<LunchBooking> list = new List<LunchBooking>();
-            list.Add(new LunchBooking { fldLunchBookingID=1,fldEmployeeID=1,fldDate="2021-12-07"});
+            list.Add(new LunchBooking { fldLunchBookingID = 1, fldEmployeeID = 1, fldDate = "2021-12-07"});
             list.Add(new LunchBooking { fldLunchBookingID = 2, fldEmployeeID = 1, fldDate = "2021-12-08" });
             list.Add(new LunchBooking { fldLunchBookingID = 3, fldEmployeeID = 2, fldDate = "2021-12-07" });
             list.Add(new LunchBooking { fldLunchBookingID = 4, fldEmployeeID = 1, fldDate = "2021-12-08" });
