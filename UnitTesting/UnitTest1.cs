@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CanteenManagement.ViewModels;
 using CanteenManagement.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CanteenTest
 {
@@ -36,23 +37,28 @@ namespace CanteenTest
             Assert.IsTrue(message.Contains("200"));
         }
 
-        [Test]
-        public void Test2()
+        [Test,TestCaseSource(nameof(TestSources))]
+        public void TestCalculateBookingForDate(string date, List<LunchBooking> lunchBookings, int exptected)
         {
             //make data
-            List<LunchBooking> list = new List<LunchBooking>();
-            list.Add(new LunchBooking { fldLunchBookingID = 1, fldEmployeeID = 1, fldDate = "2021-12-07"});
-            list.Add(new LunchBooking { fldLunchBookingID = 2, fldEmployeeID = 1, fldDate = "2021-12-08" });
-            list.Add(new LunchBooking { fldLunchBookingID = 3, fldEmployeeID = 2, fldDate = "2021-12-07" });
-            list.Add(new LunchBooking { fldLunchBookingID = 4, fldEmployeeID = 1, fldDate = "2021-12-08" });
             //activate mehtod
-            LunchPageViewModel lunch = new LunchPageViewModel();
-            int testValue = lunch.CalcuateBookingsForDate("2021-12-07",list);
+            LunchPageViewModel lunch = new LunchPageViewModel();    
+            int Result = lunch.CalcuateBookingsForDate(date, lunchBookings);
 
             //assert value
-            Assert.IsTrue(testValue == 2);
-        }
+            Assert.AreEqual(Result, exptected);
 
+            //var result = sut.Add(calcuation);
+            //assert
+            //Assert.AreEqual(result, expected);
+        }
+        
+        private static IEnumerable<object> TestSources()
+        {
+            yield return new object[] { "2021-12-07", new List<LunchBooking> { new LunchBooking { fldDate="" } }, 0 };
+            yield return new object[] { "", new List<LunchBooking> { new LunchBooking { fldDate = "2021-12-07" } }, 0 };
+            yield return new object[] { "2021-12-07", new List<LunchBooking> { new LunchBooking { fldDate = "2021-12-07" } }, 1 };
+        }
 
     }
 }
