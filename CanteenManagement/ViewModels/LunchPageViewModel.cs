@@ -616,7 +616,7 @@ namespace CanteenManagement.ViewModels
                         case 1:                          
                             if (!String.IsNullOrEmpty(TuesdayLunchTitle))
                             {
-                                //MessageBox.Show("Tirsdag");
+     
                                 lunch.FldDate = TuesdayCurrentWeek.Remove(0, 9);
                                 lunch.FldMenu = TuesdayLunchTitle;
                                 lunch.FldMenuDescription = TuesdayLunchDescription;
@@ -626,7 +626,7 @@ namespace CanteenManagement.ViewModels
                         case 2:
                             if (!String.IsNullOrEmpty(WednesdayLunchTitle))
                             {
-                                //MessageBox.Show("Onsdag");
+                             
                                 lunch.FldDate = WednesdayCurrentWeek.Remove(0, 11);
                                 lunch.FldMenu = WednesdayLunchTitle;
                                 lunch.FldMenuDescription = WednesdayLunchDescription;
@@ -637,7 +637,7 @@ namespace CanteenManagement.ViewModels
                             
                             if (!String.IsNullOrEmpty(ThursdayLunchTitle))
                             {
-                               // MessageBox.Show("Torsdag");
+                            
                                 lunch.FldDate = ThursdayCurrentWeek.Remove(0, 10);
                                 lunch.FldMenu = ThursdayLunchTitle;
                                 lunch.FldMenuDescription = ThursdayLunchDescription;
@@ -647,7 +647,7 @@ namespace CanteenManagement.ViewModels
                         case 4:
                             if (!String.IsNullOrEmpty(FridayLunchTitle))
                             {
-                                // MessageBox.Show("Fredag");
+                           
                                 lunch.FldDate = FridayCurrentWeek.Remove(0, 8);
                                 lunch.FldMenu = FridayLunchTitle;
                                 lunch.FldMenuDescription = FridayLunchDescription;
@@ -657,7 +657,7 @@ namespace CanteenManagement.ViewModels
                         case 5:
                             if (!String.IsNullOrEmpty(SaturdayLunchTitle))
                             {
-                                // MessageBox.Show("Lørdag");
+                      
                                 lunch.FldDate = SaturdayCurrentWeek.Remove(0, 10);
                                 lunch.FldMenu = SaturdayLunchTitle;
                                 lunch.FldMenuDescription = SaturdayLunchDescription;
@@ -667,11 +667,10 @@ namespace CanteenManagement.ViewModels
                         case 6:
                             if (!String.IsNullOrEmpty(SundayLunchTitle))
                             {
-                                // MessageBox.Show("Søndag");
+                           
                                 lunch.FldDate = SundayCurrentWeek.Remove(0, 8);
                                 lunch.FldMenu = SundayLunchTitle;
-                                lunch.FldMenuDescription = SundayLunchDescription;
-                           
+                                lunch.FldMenuDescription = SundayLunchDescription;                          
                             }
                             break;
                         default:
@@ -686,83 +685,56 @@ namespace CanteenManagement.ViewModels
                     tempDateList = WeekPrior(DateTime.Now.Year + yearSaveForFinal, tempDate);
 
                     
-
+                    //There is a bug when you try and finalize a week when you reach a new year
+                    //so that it can finalize a week with no prior finalized weak
                     foreach (var item in LunchList)
                     {
                         if (commandParam.ToString().Equals("final"))
                         {                                                        
                             foreach (var item2 in tempDateList)
                             {                              
-                                //MessageBox.Show(item2 + " | " + item.FldDate + " | Is not finalised? " + !item.FldMenuFinalized + " | Is not empty? " + !String.IsNullOrEmpty(lunch.FldMenu));
-                                //MessageBox.Show(item2 + " | " + cunt);
+
                                 if ((item.FldDate.Contains(item2) && !item.FldMenuFinalized
                                   || item.FldDate.Contains(lunch.FldDate) && item.FldMenuFinalized) && !String.IsNullOrEmpty(lunch.FldMenu))
                                 {
 
-                                    //MessageBox.Show("Got in! ");
                                     isNotFinalized = true;
 
                                 }
                             }
-                            /*
-                            if (isNotFinalized != false)
-                            {
-                                MessageBox.Show(lunch.FldMenu + " : Was just finalized");
-                                lunch.FldMenuFinalized = true;
-                            }
-                            */
                         } else if (commandParam.ToString().Equals("save"))
                         {
                             isNotFinalized = true;
                         }
 
-                       
-                        //MessageBox.Show(tempDateList.ElementAt(0) + " <-- Old date | New date --> " + item.FldDate);
 
                         if ((!String.IsNullOrEmpty(lunch.FldMenu) && item.FldDate.Contains(lunch.FldDate)) && !item.FldMenuFinalized)
                         {                            
                             x = true;
                             if (isNotFinalized == false)
                             {
-                                MessageBox.Show("Finalized : In update");
                                 lunch.FldMenuFinalized = true;
                             }
                             else if(isNotFinalized == true)
                             {
                                 lunch.FldMenuFinalized = item.FldMenuFinalized;
-                                MessageBox.Show("Could not finalize : In update");
                             }
-                            //MessageBox.Show(lunch.FldMenu + " : Is updated");
                             await UpdateLunchAsync(lunch);
                         }
 
                         if (!String.IsNullOrEmpty(lunch.FldMenu) && item.FldDate.Contains(lunch.FldDate) && item.FldMenuFinalized)
                         {
-                            MessageBox.Show("There is finalized item");
-                            finalizedValuesCheck = true;
-                            
+                            finalizedValuesCheck = true;                          
                         }
-
-                        //Tilføj noget der kan finde ud af om dagen har været finalized!!!!!!!!!!
                     }
                     if (!String.IsNullOrEmpty(lunch.FldMenu) && !x && !finalizedValuesCheck)
                     {
                         if (isNotFinalized == false)
                         {
-                            MessageBox.Show("Finalized : In create");
                             lunch.FldMenuFinalized = true;
                         }
-                        else if(isNotFinalized == true)
-                        {
-                            //lunch.FldMenuFinalized = false;
-                            MessageBox.Show("Could not finalize : In create");
-                        }
-                        // MessageBox.Show(lunch.FldMenu + " : Is a new entry");
                         await CreateLunchAsync(lunch);
-                    }
-
-                    //MessageBox.Show("New Week");
-                      
+                    } 
                 }                
             }
             catch (Exception e)
