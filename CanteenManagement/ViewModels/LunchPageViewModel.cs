@@ -280,7 +280,6 @@ namespace CanteenManagement.ViewModels
         /// <param name="year"></param>
         public void CalculateAmounteOfBookingForWeek(int week, int year)
         {
-            //NEEDS TO BE MOVED DOWN TO OWN METHOD LATER
             //date to weeknumber
             List<string> weekDates = new List<string>(); 
             weekDates.AddRange(WeekPrior(year, week));

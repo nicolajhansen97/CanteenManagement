@@ -37,20 +37,22 @@ namespace CanteenTest
             Assert.IsTrue(message.Contains("200"));
         }
 
+
+        /// <summary>
+        /// Made by Rasmus
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="lunchBookings"></param>
+        /// <param name="exptected"></param>
         [Test,TestCaseSource(nameof(TestSources))]
         public void TestCalculateBookingForDate(string date, List<LunchBooking> lunchBookings, int exptected)
         {
-            //make data
             //activate mehtod
             LunchPageViewModel lunch = new LunchPageViewModel();    
             int Result = lunch.CalcuateBookingsForDate(date, lunchBookings);
 
             //assert value
             Assert.AreEqual(Result, exptected);
-
-            //var result = sut.Add(calcuation);
-            //assert
-            //Assert.AreEqual(result, expected);
         }
         
         private static IEnumerable<object> TestSources()
@@ -58,6 +60,27 @@ namespace CanteenTest
             yield return new object[] { "2021-12-07", new List<LunchBooking> { new LunchBooking { fldDate="" } }, 0 };
             yield return new object[] { "", new List<LunchBooking> { new LunchBooking { fldDate = "2021-12-07" } }, 0 };
             yield return new object[] { "2021-12-07", new List<LunchBooking> { new LunchBooking { fldDate = "2021-12-07" } }, 1 };
+        }
+
+
+        /// <summary>
+        /// Made by Rasmus
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="week"></param>
+        /// <param name="exptected"></param>
+        [Test,TestCaseSource(nameof(TestSources2))]
+        public void TestGetWeekDates(int year,int week,List<string> exptected)
+        {
+            LunchPageViewModel lunch = new LunchPageViewModel();
+            List<string> Result = lunch.WeekPrior(year,week);
+
+            Assert.AreEqual(Result, exptected);
+        }
+
+        private static IEnumerable<object> TestSources2()
+        {
+            yield return new object[] {2021, 52, new List<string> { "2021-12-27", "2021-12-28", "2021-12-29", "2021-12-30", "2021-12-31", "2022-01-01", "2022-01-02" } };
         }
 
     }
