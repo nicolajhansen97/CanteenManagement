@@ -400,12 +400,12 @@ namespace CanteenManagement.ViewModels
             GetWeekDates(intYear, intWeekNumber);
         }
 
-        /* Made by Nicolaj and Niels
+        /*
+         * Made by Nicolaj and Niels
         * 
         * Checks if the week is higher than the weeks each year. If its higher, it will add a year, and set the week to 0 again.
         * When its called again it will begin the new year and week 1. 
        */
-
         public void GetOtherWeeksMinus()
         {
             if(weekSave < 2)
@@ -415,7 +415,7 @@ namespace CanteenManagement.ViewModels
             }        
 
             weekSave--;
-            MessageBox.Show("THis is weeksave -: " + weekSave);
+            //MessageBox.Show("THis is weeksave -: " + weekSave);
             GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
 
 
@@ -423,6 +423,11 @@ namespace CanteenManagement.ViewModels
             getLunch();
             CalculateAmounteOfBookingForWeek(weekSave, DateTime.Now.Year + yearSave);
         }
+
+        /// <summary>
+        /// Niels and Nicolaj
+        /// Sets year and date to increase when the forward button is clicked
+        /// </summary>
         public void GetOtherWeeksPlus()
         {
            
@@ -434,7 +439,7 @@ namespace CanteenManagement.ViewModels
             
            
             weekSave++;
-            MessageBox.Show("THis is weeksave +: " + weekSave);
+            //MessageBox.Show("THis is weeksave +: " + weekSave);
             GetWeekDates(DateTime.Now.Year + yearSave, weekSave);
            
 
@@ -443,7 +448,12 @@ namespace CanteenManagement.ViewModels
             CalculateAmounteOfBookingForWeek(weekSave, DateTime.Now.Year + yearSave);
         }
 
-
+        /// <summary>
+        /// @Niels and Nicolaj
+        /// This is a repeat code that that makes sure to not change variable in the week and year count
+        /// THis is something to be fixed later with more time, but it effects to many functions to fix now
+        /// </summary>
+        /// <returns name="tempWeek"></returns>
         public int SetWeekDown()
         {
             yearSaveForFinal = yearSave;
@@ -458,7 +468,8 @@ namespace CanteenManagement.ViewModels
             return tempWeek;
         }
 
-        /* Made by Nicolaj and Niels
+        /*
+        * Made by Nicolaj and Niels
         * 
         * Used ISOWeek to get the date of the Monday in a year and week given as a parameter.
         * Then all the other day is calculated just by adding 1 days for each day away from Monday.
@@ -529,6 +540,11 @@ namespace CanteenManagement.ViewModels
             }
         }
 
+        /*
+         * Niels and Nicolaj
+         * This method will check if the current week exsists in the data from API, and if it matches with dates of the week being looked at
+         * When it finds a match it will insert the data from the list into the relevant week
+         */
         public void CheckDates()
         {
             ClearAllProps();
@@ -578,6 +594,10 @@ namespace CanteenManagement.ViewModels
             }
         }
 
+        /*
+         * Niels and Nicolaj
+         * Clearing the propoties for when selecting new weeks so they are ready to be repopulated.
+         */
         public void ClearAllProps()
         {
             MondayLunchTitle = "";
@@ -596,6 +616,12 @@ namespace CanteenManagement.ViewModels
             SundayLunchDescription = "";
         }
 
+        /*
+         * Niels and Nicolaj
+         * This method can save and finalize lunch added by the canteen staff. Depending on the button they press the
+         * commandParam will get a unique string that is used to select a path through the logic so we dont have to loop through
+         * the data more than needed
+         */
         async Task SaveAndUpdateLunch(object commandParam)
         {          
             try
@@ -749,6 +775,10 @@ namespace CanteenManagement.ViewModels
             }
         }
 
+        /*
+         * Niels and Nicolaj
+         * This method will update values to the web API
+         */
         async Task<Lunch> UpdateLunchAsync(Lunch lunch)
         {
             HttpResponseMessage response = await ApiHelper.client.PutAsJsonAsync(ApiHelper.serverUrl + ApiHelper.getLunch + "/" + lunch.FldDate, lunch);
@@ -762,6 +792,10 @@ namespace CanteenManagement.ViewModels
             return lunch;
         }
 
+        /*
+         * Niels and Nicolaj
+         * This method will post values to the web API
+         */
         static async Task<Uri> CreateLunchAsync(Lunch lunch)
         {
             HttpResponseMessage response = await ApiHelper.client.PostAsJsonAsync(
@@ -771,6 +805,13 @@ namespace CanteenManagement.ViewModels
             return response.Headers.Location;
         }  
         
+
+        /*
+         * Niels and Nicolaj
+         * This method recieves a year and a week and returns the dates of each day of the week as a list. 
+         * This type of method has been used at the function at line 461, but that method is tied to other
+         * variables so it could not be used twice, this is something to fix later and unite them into one method
+         */
         public List<string> WeekPrior(int year, int week)
         {
             List<string> dateList = new List<string>();
