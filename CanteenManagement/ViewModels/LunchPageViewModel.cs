@@ -276,6 +276,10 @@ namespace CanteenManagement.ViewModels
         /// <summary>
         /// @author: Rasmus og Monir
         /// </summary>
+        /// This is our method for changing some data binded values so the ui changes, 
+        /// so the user can see how many have booked lunch, we call a method made before 
+        /// to get the days of the week we are looking on, then we go through a loop for each day to get 
+        /// the number for the days and then we go through a switch to update the value for that day.
         /// <param name="week"></param>
         /// <param name="year"></param>
         public void CalculateAmounteOfBookingForWeek(int week, int year)
@@ -318,6 +322,9 @@ namespace CanteenManagement.ViewModels
 
         /// <summary>
         /// @author: Rasmus og Monir
+        /// This is our method for calculating how many on a date have booked lunch.
+        /// it is just a for loop that goes through a list of dates in the database for lunches
+        /// then we check if the date is the same in a if, and increase the count and in the end we return the count.
         /// </summary>
         /// <param name="date"></param>
         /// <param name="lunchBookings"></param>

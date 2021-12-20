@@ -40,6 +40,13 @@ namespace CanteenTest
 
         /// <summary>
         /// Made by Rasmus
+        /// This is our whitebox test, here we test a method that gets a date and a list, 
+        ///and checks how many times that date is in the list. We use the method to see how many people have 
+        ///booked lunch on the different days of the week. The test works in a way that we make an object array 
+        ///that holds 1 test worth of values and then I just make more object arrays. if i want more tests. 
+        ///We had to test this method 3 times to see if all the conditions worked as intended. 
+        ///We first test if the list does not have any real values. then if the date we give is empty, 
+        ///and lastly we test to see if it can compare 2 dates and return an increased number.
         /// </summary>
         /// <param name="date"></param>
         /// <param name="lunchBookings"></param>
